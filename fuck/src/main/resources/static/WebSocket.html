@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <script src="/layui/layui.js"></script>
+    <script src="/webjars/sockjs-client/1.0.0/sockjs.js"></script>
+    <script src="/webjars/stomp-websocket/2.3.3/stomp.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+    var stompClient = null;
+
+    // 开启socket连接
+    function connect() {
+        var socket = new SockJS("http://localhost/socket");
+        stompClient = Stomp.over(socket);
+        stompClient.connect({},function (frame) {
+            console.log("connect" + frame);
+            //订阅消息队列
+            stompClient.subscribe('/topic/fuckme', function (data) {
+                console.log(data);
+            });
+        });
+    }
+
+    //开启连接
+    connect();
+
+    layui.use('layim', function (layim) {
+        //先来个客服模式压压精
+        layim.config({
+            //brief: true //是否简约模式（如果true则不显示主面板）
+            init: {
+
+            } //获取主面板列表信息
+
+            //获取群员接口（返回的数据格式见下文）
+            , members: {
+                url: '' //接口地址（返回的数据格式见下文）
+                , type: 'get' //默认get，一般可不填
+                , data: {} //额外参数
+            }
+
+            //上传图片接口（返回的数据格式见下文），若不开启图片上传，剔除该项即可
+            , uploadImage: {
+                url: '' //接口地址
+                , type: 'post' //默认post
+            }
+
+            //上传文件接口（返回的数据格式见下文），若不开启文件上传，剔除该项即可
+            , uploadFile: {
+                url: '' //接口地址
+                , type: 'post' //默认post
+            }
+
+            //扩展工具栏，下文会做进一步介绍（如果无需扩展，剔除该项即可）
+            , tool: [{
+                alias: 'code' //工具别名
+                , title: '代码' //工具名称
+                , icon: '&#xe64e;' //工具图标，参考图标文档
+            }]
+
+            , msgbox: layui.cache.dir + 'css/modules/layim/html/msgbox.html' //消息盒子页面地址，若不开启，剔除该项即可
+            , find: layui.cache.dir + 'css/modules/layim/html/find.html' //发现页面地址，若不开启，剔除该项即可
+            , chatLog: layui.cache.dir + 'css/modules/layim/html/chatlog.html' //聊天记录页面地址，若不开启，剔除该项即可
+        }).chat({
+            name: '客服姐姐'
+            ,type: 'friend'
+            ,avatar: 'http://tp1.sinaimg.cn/5619439268/180/40030060651/1'
+            ,id: -2
+        });
+        layim.on('sendMessage', function(res) {
+            //包含我发送的消息及我的信息
+            var mine = res.mine;
+            /*mine的结构如下：
+            {
+                avatar: "avatar.jpg" //我的头像
+                    ,content: "你好吗" //消息内容
+                ,id: "100000" //我的id
+                ,mine: true //是否我发送的消息
+                ,username: "纸飞机" //我的昵称
+            }*/
+            console.log(mine.content);
+            stompClient.send("/app/fuck", {}, mine.content);
+        });
+    });
+</script>
+</html>
