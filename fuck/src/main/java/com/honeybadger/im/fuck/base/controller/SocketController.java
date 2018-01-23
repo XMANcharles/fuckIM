@@ -8,7 +8,7 @@
  * <author>          <time>          <version>          <desc>
  * 作者姓名           修改时间           版本号              描述
  */
-package com.honeybadger.im.fuck.controller;
+package com.honeybadger.im.fuck.base.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
