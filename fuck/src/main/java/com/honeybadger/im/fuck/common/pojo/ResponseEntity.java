@@ -11,7 +11,7 @@
 package com.honeybadger.im.fuck.common.pojo;
 
 /**
- * 〈〉
+ * 〈LayIM通用ResponseEntity〉
  *
  * @author Neo Geng
  * Date 2018/1/20

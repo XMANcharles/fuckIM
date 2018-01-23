@@ -13,7 +13,7 @@ package com.honeybadger.im.fuck.base.bean;
 import com.honeybadger.im.fuck.user.entity.User;
 
 /**
- * 〈〉
+ * 〈LayIM初始化数据结构〉
  *
  * @author Neo Geng
  * Date 2018/1/21

@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 〈〉
+ * 〈RabbitMqConfigurer〉
  *
  * @author Neo Geng
  * Date 2018/1/18

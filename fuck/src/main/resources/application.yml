@@ -5,18 +5,19 @@ spring:
 ---
 spring:
   profiles: dev
+# 使用STOMP协议，不需要打开以下注释
 #  rabbitmq:
 #    host: 192.168.75.128
 #    port: 5672
 #    username: admin
 #    password: admin
+# RabbitMQ-ip：192.168.75.128
 
-
-  #database
+  #database-H2
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.H2Dialect
-    #配置更新策略-防止hibernate重置表，造成数据丢失
+    #配置更新策略-防止JPA重置表，造成数据丢失
     hibernate:
       ddl-auto: update
 #  datasource:
