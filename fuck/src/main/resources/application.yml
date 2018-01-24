@@ -6,12 +6,18 @@ spring:
 spring:
   profiles: dev
 # 使用STOMP协议，不需要打开以下注释
-#  rabbitmq:
-#    host: 192.168.75.128
-#    port: 5672
-#    username: admin
-#    password: admin
-# RabbitMQ-ip：192.168.75.128
+  rabbitmq:
+    host: 118.89.48.231
+    port: 5672
+    username: fuckim
+    password: chengzi
+#    依据RabbitMQ和Spring AMQP参考文档，事务(Transactional)或发布确认(Publisher Confirms / aka Publisher Acknowledgements)机制可保证消息被正确投递，即从理论上来说MQ不会丢消息。
+#    注意这两种机制不能共存。事务机制是重量级的，同步的，会带来大量开销；发布确认机制则是轻量级的，异步的。
+#    对于发布确认机制，(1) 需置CachingConnectionFactory的publisherConfirms属性为true；(2) 生产者需调用setConfirmCallback(ConfirmCallback callback)，Confirms就会回调给生产者；(3) 消费者需考虑消息去重处理。
+#    这里需要注意的是，一个RabbitTemplate只能支持一个ConfirmCallback。
+    publisher-confirms: true
+
+# Orange_RabbitMQ-ip：192.168.75.128
 
   #database-H2
   jpa:

@@ -12,23 +12,6 @@
 
 </body>
 <script>
-    var stompClient = null;
-
-    // 开启socket连接
-    function connect() {
-        var socket = new SockJS("http://localhost/socket");
-        stompClient = Stomp.over(socket);
-        stompClient.connect({},function (frame) {
-            console.log("connect" + frame);
-            //订阅消息队列
-            stompClient.subscribe('/topic/fuckme', function (data) {
-                console.log(data);
-            });
-        });
-    }
-
-    //开启连接
-    connect();
 
     layui.use('layim', function (layim) {
         //先来个客服模式压压精
@@ -36,8 +19,8 @@
             //brief: true //是否简约模式（如果true则不显示主面板）
             init: {
                 url: '/initdata' //接口地址（返回的数据格式见下文）
-                ,type: 'get' //默认get，一般可不填
-                ,data: {} //额外参数
+                , type: 'get' //默认get，一般可不填
+                , data: {} //额外参数
             } //获取主面板列表信息
 
             //获取群员接口（返回的数据格式见下文）
@@ -69,8 +52,39 @@
             , msgbox: layui.cache.dir + 'css/modules/layim/html/msgbox.html' //消息盒子页面地址，若不开启，剔除该项即可
             , find: layui.cache.dir + 'css/modules/layim/html/find.html' //发现页面地址，若不开启，剔除该项即可
             , chatLog: layui.cache.dir + 'css/modules/layim/html/chatlog.html' //聊天记录页面地址，若不开启，剔除该项即可
+        }).chat({
+            name: '在线客服-心心'
+            , type: 'friend'
+            , avatar: 'http://tva1.sinaimg.cn/crop.219.144.555.555.180/0068iARejw8esk724mra6j30rs0rstap.jpg'
+            , id: -2
         });
-        layim.on('sendMessage', function(res) {
+
+        //开启连接
+        var stompClient = null;
+        // 开启socket连接
+        var socket = new SockJS("http://localhost/socket");
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            console.log("connect" + frame);
+            //订阅消息队列
+            stompClient.subscribe('/fuckme', function (data) {
+                //data = JSON.parse(data);
+                //监听接收消息
+                layim.getMessage({
+                    username: "在线客服-心心" //消息来源用户名
+                    , avatar: "http://tva1.sinaimg.cn/crop.219.144.555.555.180/0068iARejw8esk724mra6j30rs0rstap.jpg" //消息来源用户头像
+                    , id: "-2" //消息的来源ID（如果是私聊，则是用户id，如果是群聊，则是群组id）
+                    , type: "friend" //聊天窗口来源类型，从发送消息传递的to里面获取
+                    , content: data.body //消息内容
+                    , cid: 0 //消息id，可不传。除非你要对消息进行一些操作（如撤回）
+                    , mine: false //是否我发送的消息，如果为true，则会显示在右方
+                    , fromid: "-2" //消息的发送者id（比如群组中的某个消息发送者），可用于自动解决浏览器多窗口时的一些问题
+                    , timestamp: 1467475443306 //服务端时间戳毫秒数。注意：如果你返回的是标准的 unix 时间戳，记得要 *1000}); //res.data即你发送消息传递的数据（阅读：监听发送的消息）
+                });
+            });
+        });
+        //发送消息监听
+        layim.on('sendMessage', function (res) {
             //包含我发送的消息及我的信息
             var mine = res.mine;
             /*mine的结构如下：
