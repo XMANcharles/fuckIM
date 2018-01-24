@@ -32,22 +32,22 @@ public class WebSocketMessageBroker extends AbstractWebSocketMessageBrokerConfig
         //简单的消息代理，基于内存，（包括@MessssageMapiing注解方法的返回值）
         //registry.enableSimpleBroker("/topic");
         //STOMP代理中继
-        registry.enableStompBrokerRelay("/topic", "queue")
-                .setRelayHost("192.168.75.128")
-                //.setRelayPort(5672)
-                .setRelayPort(61613)
-                .setSystemLogin("admin")
-                .setSystemPasscode("admin")
-                //!!!!居然写错API？？？
-                .setClientLogin("admin")
-                .setClientPasscode("admin");
+//        registry.enableStompBrokerRelay("/topic", "queue")
+//                .setRelayHost("192.168.75.128")
+//                //.setRelayPort(5672)
+//                .setRelayPort(61613)
+//                .setSystemLogin("admin")
+//                .setSystemPasscode("admin")
+//                //!!!!居然写错API？？？
+//                .setClientLogin("admin")
+//                .setClientPasscode("admin");
         //服务端处理的前缀，交由@MessageMapping处理
         registry.setApplicationDestinationPrefixes("/app");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        //注册一个STOMP端点，来接收客户端的连接。开启SockJS支持
+        //注册一个STOMP端点，客户端通过此端点连接，开启SockJS支持
         registry.addEndpoint("/socket").withSockJS();
     }
 }

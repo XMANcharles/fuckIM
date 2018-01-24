@@ -11,8 +11,12 @@
 package com.honeybadger.im.fuck.configuration;
 
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 /**
  * 〈RabbitMqConfigurer〉
@@ -24,9 +28,25 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMqConfigurer {
 
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
+
     @Bean
-    public Queue queue(){
-        return new Queue("/fuck");
+    public Queue Queue(){
+        return new Queue("fuck");
+    }
+
+    @Bean
+    public Queue useQueue(){
+        return new Queue("user");
+    }
+
+    //消费者-以后肯定需要抽取
+    @RabbitListener(queues = "fuck")
+    @RabbitHandler
+    public void processReceive(String content) {
+        System.out.println("读取到"+content);
+        simpMessagingTemplate.convertAndSend("/fuckme",content);
     }
 
 }

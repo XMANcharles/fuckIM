@@ -40,6 +40,8 @@ public class SocketController {
     public void fuckYou(String content) {
         System.out.println(content);
         LOGGER.debug("receive web message:"+content);
+        //发送到RabbitMQ-Queue-fuck
+        rabbitTemplate.convertAndSend("fuck",content);
     }
 
 }
