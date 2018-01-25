@@ -36,9 +36,8 @@ public class SocketController {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @MessageMapping("/fuck")
+    @MessageMapping("/message/send")
     public void fuckYou(String content) {
-        System.out.println(content);
         LOGGER.debug("receive web message:"+content);
         //发送到RabbitMQ-Queue-fuck
         rabbitTemplate.convertAndSend("fuck",content);

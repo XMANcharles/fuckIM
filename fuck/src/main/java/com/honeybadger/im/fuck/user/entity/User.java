@@ -28,7 +28,6 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "USER")
-//@NamedQuery(name="User.findAll", query="SELECT t FROM USER t")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
 public class User implements Serializable {
 

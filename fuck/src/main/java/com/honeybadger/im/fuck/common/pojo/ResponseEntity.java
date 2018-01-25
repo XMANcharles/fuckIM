@@ -19,8 +19,14 @@ package com.honeybadger.im.fuck.common.pojo;
  */
 public class ResponseEntity<T> {
 
-    private final int code;//0表示成功，其它表示失败
-    private final String msg; //失败信息
+    /**
+     *  0表示成功，其它表示失败
+     */
+    private final int code;
+    /**
+     * 失败信息
+     */
+    private final String msg;
     private final T data;
 
     public ResponseEntity(int code, String msg, T data) {

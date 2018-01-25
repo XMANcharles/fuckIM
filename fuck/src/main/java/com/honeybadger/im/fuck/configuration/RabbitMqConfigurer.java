@@ -32,21 +32,24 @@ public class RabbitMqConfigurer {
     private SimpMessagingTemplate simpMessagingTemplate;
 
     @Bean
-    public Queue Queue(){
-        return new Queue("fuck");
+    public Queue userQueue(){
+        return new Queue("message");
     }
 
     @Bean
-    public Queue useQueue(){
-        return new Queue("user");
+    public Queue groupQueue(){
+        return new Queue("group");
     }
 
-    //消费者-以后肯定需要抽取
-    @RabbitListener(queues = "fuck")
+    /**
+     * 消费者-以后肯定需要抽取
+     */
+    @RabbitListener(queues = "message")
     @RabbitHandler
     public void processReceive(String content) {
         System.out.println("读取到"+content);
-        simpMessagingTemplate.convertAndSend("/fuckme",content);
+        //simpMessagingTemplate.convertAndSend("/fuckme",content);
+        //simpMessagingTemplate.convertAndSendToUser();
     }
 
 }
