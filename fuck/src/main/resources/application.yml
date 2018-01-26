@@ -15,10 +15,9 @@ spring:
 #    注意这两种机制不能共存。事务机制是重量级的，同步的，会带来大量开销；发布确认机制则是轻量级的，异步的。
 #    对于发布确认机制，(1) 需置CachingConnectionFactory的publisherConfirms属性为true；(2) 生产者需调用setConfirmCallback(ConfirmCallback callback)，Confirms就会回调给生产者；(3) 消费者需考虑消息去重处理。
 #    这里需要注意的是，一个RabbitTemplate只能支持一个ConfirmCallback。
-    publisher-confirms: true
+    #publisher-confirms: true
 
 # Orange_RabbitMQ-ip：192.168.75.128
-
   #database-H2
   jpa:
     show-sql: true
