@@ -7,12 +7,22 @@
     <script src="/layui/layui.js"></script>
     <script src="/webjars/sockjs-client/1.0.0/sockjs.js"></script>
     <script src="/webjars/stomp-websocket/2.3.3/stomp.js"></script>
+    <script src="/webjars/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
 
 </body>
 <script>
+    (function ($) {
+        $.getUrlParam = function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return decodeURI(r[2]);
+            return null;
+        }
+    })(jQuery);
 
+    var id = $.getUrlParam("id");
     layui.use('layim', function (layim) {
         //先来个客服模式压压精
         layim.config({
@@ -20,7 +30,7 @@
             init: {
                 url: '/initdata' //接口地址（返回的数据格式见下文）
                 , type: 'get' //默认get，一般可不填
-                , data: {} //额外参数
+                , data: {id: id} //额外参数
             } //获取主面板列表信息
 
             //获取群员接口（返回的数据格式见下文）
@@ -53,10 +63,10 @@
             , find: layui.cache.dir + 'css/modules/layim/html/find.html' //发现页面地址，若不开启，剔除该项即可
             , chatLog: layui.cache.dir + 'css/modules/layim/html/chatlog.html' //聊天记录页面地址，若不开启，剔除该项即可
         }).chat({
-            name: '在线客服-心心'
-            , type: 'friend'
-            , avatar: 'http://tva1.sinaimg.cn/crop.219.144.555.555.180/0068iARejw8esk724mra6j30rs0rstap.jpg'
-            , id: -2
+            name: id==="0001"?"如风如梦":"耿鑫"
+            ,type: 'friend'
+            ,avatar: 'http://tp1.sinaimg.cn/5619439268/180/40030060651/1'
+            ,id: id==="0001"?"0002":"0001"
         });
 
         //开启连接
@@ -64,22 +74,23 @@
         // 开启socket连接
         var socket = new SockJS("http://localhost/socket");
         stompClient = Stomp.over(socket);
-        stompClient.connect({}, function (frame) {
-            console.log("connect" + frame);
-            //订阅消息队列
-            stompClient.subscribe('/fuckme', function (data) {
+        stompClient.connect(id, id, function (frame) {
+            console.log('*****  Connected  *****');
+            //订阅消息队列。。。
+            stompClient.subscribe("/user/queue/position-updates", function (data) {
                 //data = JSON.parse(data);
+                var body = JSON.parse(data.body);
                 //监听接收消息
                 layim.getMessage({
-                    username: "在线客服-心心" //消息来源用户名
-                    , avatar: "http://tva1.sinaimg.cn/crop.219.144.555.555.180/0068iARejw8esk724mra6j30rs0rstap.jpg" //消息来源用户头像
-                    , id: "-2" //消息的来源ID（如果是私聊，则是用户id，如果是群聊，则是群组id）
-                    , type: "friend" //聊天窗口来源类型，从发送消息传递的to里面获取
-                    , content: data.body //消息内容
+                    username: body.mine.username //消息来源用户名
+                    , avatar: body.mine.avatar //消息来源用户头像
+                    , id: body.mine.id //消息的来源ID（如果是私聊，则是用户id，如果是群聊，则是群组id）
+                    , type: body.to.type //聊天窗口来源类型，从发送消息传递的to里面获取
+                    , content: body.mine.content //消息内容
                     , cid: 0 //消息id，可不传。除非你要对消息进行一些操作（如撤回）
                     , mine: false //是否我发送的消息，如果为true，则会显示在右方
-                    , fromid: "-2" //消息的发送者id（比如群组中的某个消息发送者），可用于自动解决浏览器多窗口时的一些问题
-                    , timestamp: 1467475443306 //服务端时间戳毫秒数。注意：如果你返回的是标准的 unix 时间戳，记得要 *1000}); //res.data即你发送消息传递的数据（阅读：监听发送的消息）
+                    , fromid: body.mine.id //消息的发送者id（比如群组中的某个消息发送者），可用于自动解决浏览器多窗口时的一些问题
+                    , timestamp: new Date().getTime() //服务端时间戳毫秒数。注意：如果你返回的是标准的 unix 时间戳，记得要 *1000});
                 });
             });
         });
@@ -90,13 +101,23 @@
             /*mine的结构如下：
             {
                 avatar: "avatar.jpg" //我的头像
-                    ,content: "你好吗" //消息内容
+                ,content: "你好吗" //消息内容
                 ,id: "100000" //我的id
                 ,mine: true //是否我发送的消息
                 ,username: "纸飞机" //我的昵称
             }*/
-            console.log(mine.content);
-            stompClient.send("/app/fuck", {}, mine.content);
+            var to = res.to; //对方的信息
+            //to的结构如下：
+            /*{
+                avatar: "avatar.jpg"
+                ,id: "100001"
+                ,name: "贤心"
+                ,sign: "这些都是测试数据，实际使用请严格按照该格式返回"
+                ,type: "friend" //聊天类型，一般分friend和group两种，group即群聊
+                ,username: "贤心"
+            }*/
+            var message = JSON.stringify(res);
+            stompClient.send("/app/message/send", {}, message);
         });
     });
 </script>

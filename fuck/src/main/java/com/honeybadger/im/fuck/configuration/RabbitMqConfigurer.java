@@ -10,6 +10,7 @@
  */
 package com.honeybadger.im.fuck.configuration;
 
+import com.honeybadger.im.fuck.message.bean.Message;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -46,10 +47,11 @@ public class RabbitMqConfigurer {
      */
     @RabbitListener(queues = "message")
     @RabbitHandler
-    public void processReceive(String content) {
+    public void processReceive(Message content) {
         System.out.println("读取到"+content);
-        //simpMessagingTemplate.convertAndSend("/fuckme",content);
-        //simpMessagingTemplate.convertAndSendToUser();
+        //模拟发送给用户
+        //String sessionId = WebSocketMessageBrokerConfigurer.users.get("guest");
+        simpMessagingTemplate.convertAndSendToUser(content.getTo().getId(),"/queue/position-updates",content);
     }
 
 }
