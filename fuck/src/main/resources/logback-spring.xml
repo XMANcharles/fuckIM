@@ -23,7 +23,7 @@
         <logger name="com.honeybadger.fuck" level="DEBUG">
             <appender-ref ref="FILE"/>
         </logger>
-        <root level="INFO ">
+        <root level="INFO">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="FILE"/>
         </root>
