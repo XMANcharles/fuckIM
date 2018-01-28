@@ -8,7 +8,7 @@
  * <author>          <time>          <version>          <desc>
  * 作者姓名           修改时间           版本号              描述
  */
-package com.honeybadger.im.fuck.configuration;
+package com.honeybadger.im.fuck.message.configuration;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
