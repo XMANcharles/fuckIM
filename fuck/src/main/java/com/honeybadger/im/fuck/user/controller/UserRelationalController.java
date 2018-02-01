@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @author zcolder
  * @date 2018/02/01
  */
-@RestController(value = "/UserRaletional")
-public class UserRaletionalController {
+@RestController(value = "/UserRelational")
+public class UserRelationalController {
     /**
      * 添加用户关系(即添加好友)
      * 此处须在队列中等待被添加方同意请求
@@ -19,7 +19,7 @@ public class UserRaletionalController {
      * @return true and false 成功与否
      */
     @RequestMapping(value = "/addFriend")
-    public boolean addUserRaletional(@PathVariable String userId,
+    public boolean addUserRelational(@PathVariable String userId,
                                      @PathVariable String friendId){
 
         return true;
@@ -32,8 +32,8 @@ public class UserRaletionalController {
      * @param userId 动手的那个人
      * @param friendId 被干掉的那个人 tony马表面兄弟
      */
-    @RequestMapping(value = "/delectFriend")
-    public void delectUserraletional(@PathVariable String userId,
+    @RequestMapping(value = "/deleteFriend")
+    public void deleteUserRelational(@PathVariable String userId,
                                      @PathVariable String friendId){
     }
 
@@ -44,8 +44,8 @@ public class UserRaletionalController {
      * @param userId 你爱人
      * @param friendId 被绿的兄弟
      */
-    @RequestMapping(value = "/updataFriendStatus")
-    public void updataUserraletional(@PathVariable String userId,
+    @RequestMapping(value = "/updateFriendStatus")
+    public void updateUserRelational(@PathVariable String userId,
                                      @PathVariable String friendId){
 
     }
