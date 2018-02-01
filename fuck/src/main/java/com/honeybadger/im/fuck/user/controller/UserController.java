@@ -10,14 +10,17 @@
  */
 package com.honeybadger.im.fuck.user.controller;
 
+import com.honeybadger.im.fuck.tool.Uuid;
 import com.honeybadger.im.fuck.user.dao.UserDao;
 import com.honeybadger.im.fuck.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.sound.midi.Soundbank;
 import java.util.List;
 
 /**
@@ -35,13 +38,27 @@ public class UserController {
 
     @RequestMapping(value = "/users/{id}",method = RequestMethod.GET)
     public User getUser(@PathVariable String id){
-        User one = userDao.getOne(id);
-        return one;
+        return userDao.getOne(id);
     }
 
     @RequestMapping(value = "/users",method = RequestMethod.GET)
     public List<User> findAll(){
         return userDao.findAll();
+    }
+
+    /**
+     * 用户注册（写一半）
+     * {@link Uuid 生成uuid的工具}
+     * @param username 用户名
+     * @param password 用户密码
+     */
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public void userRegistration(@PathVariable String username,
+                                 @PathVariable String password){
+        User user = new User();
+        user.setId(Uuid.getUUID());
+        user.setUsername(username);
+        user.setPassword(new BCryptPasswordEncoder().encode(password));
     }
 
 }

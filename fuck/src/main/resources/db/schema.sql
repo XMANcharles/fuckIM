@@ -16,3 +16,11 @@ CREATE TABLE IF NOT EXISTS user_role (
   user_id VARCHAR2(32), --用户id？复合主键吗？感觉不需要
   role_id VARCHAR2(32)  --角色id
 );
+CREATE TABLE IF NOT EXISTS UserRelational (
+  uuid VARCHAR2(32) PRIMARY KEY,
+  userid VARCHAR2(32),
+  friendid VARCHAR2(32),
+  FriendOnlineStatus BOOLEAN,
+  FriendNote VARCHAR2(32),
+  FriendGroupName VARCHAR2(16)
+);
