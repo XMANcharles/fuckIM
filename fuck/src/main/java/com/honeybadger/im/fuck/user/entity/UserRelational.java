@@ -36,31 +36,31 @@ public class UserRelational {
      * 好友id
      */
     @Column
-    private String FriendId;
+    private String friendId;
 
     /**
      * 好友在线情况
      */
     @Column
     @JsonSetter
-    private boolean FriendOnlineStatus;
+    private boolean friendOnlineStatus;
 
     /**
      * 好友备注
      */
     @Column
-    private String FriendNote;
+    private String friendNote;
 
     /**
      * 好友所在分组(此处应该有一个默认值)
      */
     @Column
-    private String FriendGroupName;
+    private String friendGroupName;
 
     /**
      * 封装好友信息(将联表所查询到的user id对应信息封印在此)
      */
-    private User FriendInfo;
+    private User friendInfo;
 
     public String getUuid() {
         return uuid;
@@ -79,42 +79,42 @@ public class UserRelational {
     }
 
     public String getFriendId() {
-        return FriendId;
+        return friendId;
     }
 
     public void setFriendId(String friendId) {
-        FriendId = friendId;
+        this.friendId = friendId;
     }
 
     public boolean isFriendOnlineStatus() {
-        return FriendOnlineStatus;
+        return friendOnlineStatus;
     }
 
     public void setFriendOnlineStatus(boolean friendOnlineStatus) {
-        FriendOnlineStatus = friendOnlineStatus;
+        this.friendOnlineStatus = friendOnlineStatus;
     }
 
     public String getFriendNote() {
-        return FriendNote;
+        return friendNote;
     }
 
     public void setFriendNote(String friendNote) {
-        FriendNote = friendNote;
+        this.friendNote = friendNote;
     }
 
     public String getFriendGroupName() {
-        return FriendGroupName;
+        return friendGroupName;
     }
 
     public void setFriendGroupName(String friendGroupName) {
-        FriendGroupName = friendGroupName;
+        this.friendGroupName = friendGroupName;
     }
 
     public User getFriendInfo() {
-        return FriendInfo;
+        return friendInfo;
     }
 
     public void setFriendInfo(User friendInfo) {
-        FriendInfo = friendInfo;
+        this.friendInfo = friendInfo;
     }
 }
