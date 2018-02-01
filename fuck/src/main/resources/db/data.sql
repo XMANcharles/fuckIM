@@ -1,4 +1,15 @@
 --初始化脚本,第一次运行打开
--- INSERT INTO user VALUES ('0001', '耿鑫1', 1, '我要打十个', 'aaa.jpg');
--- INSERT INTO user VALUES ('0002', '耿鑫2', 1, '我要打十个！', 'aaa.jpg');
--- INSERT INTO user VALUES ('0003', '耿鑫3', 0, '我要打十个！', 'aaa.jpg');
+DELETE user;
+INSERT INTO user VALUES ('0001', '耿鑫1', 1, '我要打十个', 'aaa.jpg','$2a$10$iPFXYw0maUa143FZlvfdLuBfGLSPtuKkVF5bU86USl4vVXL60fuuC');
+INSERT INTO user VALUES ('0002', '耿鑫2', 1, '我要打十个！', 'aaa.jpg','0002');
+INSERT INTO user VALUES ('0003', '耿鑫3', 0, '我要打十个！', 'aaa.jpg','0003');
+
+--ROLE
+INSERT INTO ROLE VALUES ('0001', '管理员');
+INSERT INTO ROLE VALUES ('0002', 'VIP');
+INSERT INTO ROLE VALUES ('0003', 'USER');
+
+--USER_ROLE
+INSERT INTO USER_ROLE VALUES ('0001', '0001', '0001');
+INSERT INTO USER_ROLE VALUES ('0002', '0001', '0003');
+INSERT INTO USER_ROLE VALUES ('0003', '0002', '0003');

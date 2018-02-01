@@ -13,11 +13,9 @@ package com.honeybadger.im.fuck.user.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 〈User〉
@@ -38,6 +36,9 @@ public class User implements Serializable {
     private String username;
 
     @Column
+    private String password;
+
+    @Column
     @JsonSetter
     private boolean status;
 
@@ -46,6 +47,17 @@ public class User implements Serializable {
 
     @Column
     private String avatar;
+
+    /**
+     * {@link @ManyToMany}注释表示Teacher是多对多关系的一端。
+     * {@link @JoinTable}描述了多对多关系的数据表关系。name属性指定中间表名称，joinColumns定义中间表与USER表的外键关系。
+     * 中间表USER_ROLE的USER_ID列是USER表的主键列对应的外键列，inverseJoinColumns属性定义了中间表与另外一端(ROLE)的外键关系。
+     */
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "USER_ROLE",
+            joinColumns = { @JoinColumn(name = "USER_ID", referencedColumnName = "ID") },
+            inverseJoinColumns = { @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID") })
+    private List<Role> roles;
 
     public String getId() {
         return id;
@@ -63,8 +75,16 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public String getStatus() {
-        return status?"online":"hide";
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isStatus() {
+        return status;
     }
 
     public void setStatus(boolean status) {
@@ -83,7 +103,15 @@ public class User implements Serializable {
         return avatar;
     }
 
-    public void setavatar(String avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
