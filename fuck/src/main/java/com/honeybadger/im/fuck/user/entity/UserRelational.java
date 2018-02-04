@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 
 /**
@@ -14,60 +15,53 @@ import javax.persistence.Table;
  * @author zcolder
  * @date 2018/02/01
  */
-@Entity(name = "UserRelational")
-@Table(name = "UserRelational")
+@Entity
+@Table(name = "user_relational")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
-public class UserRelational {
+public class UserRelational implements Serializable {
 
     /**
      * jpa的必须有一个id(此表中的uuid是孤儿数据)
      */
     @Id
-    @Column(name = "uuid")
-    private String uuid;
+    @Column(name = "id")
+    private String id;
 
     /**
      * 用户id
      */
-    @Column
+    @Column(name = "user_id")
     private String userId;
 
     /**
      * 好友id
      */
-    @Column
+    @Column(name = "friend_id")
     private String friendId;
-
-    /**
-     * 好友在线情况
-     */
-    @Column
-    @JsonSetter
-    private boolean friendOnlineStatus;
 
     /**
      * 好友备注
      */
-    @Column
+    @Column(name = "friend_note")
     private String friendNote;
 
     /**
-     * 好友所在分组(此处应该有一个默认值)
+     * 好友所在分组的id(此处应该有一个默认值)
      */
-    @Column
-    private String friendGroupName;
+    @Column(name = "group_id")
+    private int groupId;
 
     /**
      * 封装好友信息(将联表所查询到的user id对应信息封印在此)
      */
     private User friendInfo;
 
-    public String getUuid() {
-        return uuid;
+    public String getId() {
+        return id;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUserId() {
@@ -86,14 +80,6 @@ public class UserRelational {
         this.friendId = friendId;
     }
 
-    public boolean isFriendOnlineStatus() {
-        return friendOnlineStatus;
-    }
-
-    public void setFriendOnlineStatus(boolean friendOnlineStatus) {
-        this.friendOnlineStatus = friendOnlineStatus;
-    }
-
     public String getFriendNote() {
         return friendNote;
     }
@@ -102,12 +88,12 @@ public class UserRelational {
         this.friendNote = friendNote;
     }
 
-    public String getFriendGroupName() {
-        return friendGroupName;
+    public int getGroupId() {
+        return groupId;
     }
 
-    public void setFriendGroupName(String friendGroupName) {
-        this.friendGroupName = friendGroupName;
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     public User getFriendInfo() {
