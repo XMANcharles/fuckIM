@@ -1,6 +1,6 @@
 package com.honeybadger.im.fuck.user.dao;
 
-import com.honeybadger.im.fuck.user.entity.UserRelational;
+import com.honeybadger.im.fuck.user.vo.UserRelational;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

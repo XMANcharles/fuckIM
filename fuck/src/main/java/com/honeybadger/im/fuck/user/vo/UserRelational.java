@@ -1,14 +1,13 @@
-package com.honeybadger.im.fuck.user.entity;
+package com.honeybadger.im.fuck.user.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.honeybadger.im.fuck.user.entity.User;
 
-import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
-
 
 /**
  * 用户关系(即好友,一对多)
