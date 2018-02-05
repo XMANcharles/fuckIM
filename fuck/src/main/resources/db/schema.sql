@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS user (
   username VARCHAR2(32),
   status   BOOLEAN,
   sign     VARCHAR2(32),
-  avatar   VARCHAR2(32),
+  avatar   VARCHAR2(255),
   password VARCHAR2(60) --Password
 );
 CREATE TABLE IF NOT EXISTS role (
