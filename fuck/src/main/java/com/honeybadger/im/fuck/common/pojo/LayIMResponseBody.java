@@ -17,7 +17,7 @@ package com.honeybadger.im.fuck.common.pojo;
  * Date 2018/1/20
  * @since 1.0.0
  */
-public class ResponseEntity<T> {
+public class LayIMResponseBody<T> {
 
     /**
      *  0表示成功，其它表示失败
@@ -29,18 +29,18 @@ public class ResponseEntity<T> {
     private final String msg;
     private final T data;
 
-    public ResponseEntity(int code, String msg, T data) {
+    public LayIMResponseBody(int code, String msg, T data) {
         this.data = data;
         this.code = code;
         this.msg = msg;
     }
 
-    public static <T> ResponseEntity<T> buildSuccess(T data) {
-        return new ResponseEntity<>(0, null, data);
+    public static <T> LayIMResponseBody<T> buildSuccess(T data) {
+        return new LayIMResponseBody<>(0, null, data);
     }
 
-    public static <T> ResponseEntity<T> buildFail(String msg) {
-        return new ResponseEntity<>(1,msg, null);
+    public static <T> LayIMResponseBody<T> buildFail(String msg) {
+        return new LayIMResponseBody<>(1,msg, null);
     }
 
     public int getCode() {
