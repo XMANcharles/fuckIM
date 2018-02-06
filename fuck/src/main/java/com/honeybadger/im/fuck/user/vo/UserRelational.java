@@ -3,10 +3,7 @@ package com.honeybadger.im.fuck.user.vo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.honeybadger.im.fuck.user.entity.User;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -53,6 +50,8 @@ public class UserRelational implements Serializable {
     /**
      * 封装好友信息(将联表所查询到的user id对应信息封印在此)
      */
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(name = "id",insertable = false,updatable = false)
     private User friendInfo;
 
     public String getId() {

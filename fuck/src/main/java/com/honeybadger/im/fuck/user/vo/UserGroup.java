@@ -13,8 +13,6 @@ import java.io.Serializable;
 public class UserGroup implements Serializable {
 
     @Id
-    @Column
-    @GeneratedValue
     private int id;
 
     @Column(name = "user_id")
