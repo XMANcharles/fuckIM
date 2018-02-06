@@ -42,11 +42,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                //配置许可的URL&&除此之外全部认证
                 .mvcMatchers("/").permitAll().anyRequest().authenticated()
-                .and().formLogin().permitAll().defaultSuccessUrl("/")
+                //启动FormLogin
+                .and().formLogin().defaultSuccessUrl("/")
+                //配置logout
                 .and().logout().logoutUrl("/logout")
+                //配置Session
                 .and().sessionManagement().maximumSessions(1).expiredUrl("/expired").and()
-                .and().exceptionHandling().accessDeniedPage("/accessDenied");
+                //配置异常处理-访问拒接页面（已认证授权、权限不足）
+                .and().exceptionHandling()//.accessDeniedPage("/accessDenied")
+                //X-Frame-Options-同源策略
+                .and().headers().frameOptions().sameOrigin();
     }
 
     @Override
@@ -62,5 +69,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //在大多数情况下， BCrypt 是一个好的选择，除非你有一个遗留系统强制你使用其他的算法。
         auth.userDetailsService(detailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
+
 
 }

@@ -39,10 +39,10 @@ public class SocketController {
 
     @MessageMapping("/message/send")
     public void fuckYou(Message message) {
-        LOGGER.debug("receive web message:"+message.getMine().getContent());
+        LOGGER.debug("receive web message:" + message.getMine().getContent());
         //发送到RabbitMQ-Queue-fuck
         System.out.println(message.getMine().getContent());
-        rabbitTemplate.convertAndSend("message",message);
+        rabbitTemplate.convertAndSend("message", message);
     }
 
 }

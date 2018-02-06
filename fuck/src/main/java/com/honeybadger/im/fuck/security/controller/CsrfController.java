@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 〈CsrfController 〉
- *
+ *  暴露CSRF，供前端获取。（解决前端不适用框架的场景，如ajax）
  * @author Neo Geng
  * Date 2018/2/1
  * @since 1.0.0

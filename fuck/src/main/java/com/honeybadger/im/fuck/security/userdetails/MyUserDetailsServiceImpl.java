@@ -8,10 +8,10 @@
  * <author>          <time>          <version>          <desc>
  * 作者姓名           修改时间           版本号              描述
  */
-package com.honeybadger.im.fuck.security.core.userdetails;
+package com.honeybadger.im.fuck.security.userdetails;
 
-import com.honeybadger.im.fuck.user.dao.UserDao;
-import com.honeybadger.im.fuck.user.entity.User;
+import com.honeybadger.im.fuck.user.dao.UserVORepository;
+import com.honeybadger.im.fuck.user.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.GrantedAuthority;
@@ -37,7 +37,7 @@ import java.util.Set;
 public class MyUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UserDao userDao;
+    private UserVORepository userVORepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -45,7 +45,7 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("用户名不存在");
         }
         //查出User
-        User loginUser = userDao.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("用户不存在"));
+        UserVO loginUser = userVORepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("用户不存在"));
         //对User授权
         Set<GrantedAuthority> authorities = new HashSet<>();
         loginUser.getRoles().forEach(t->authorities.add(new SimpleGrantedAuthority(t.getRolename())));

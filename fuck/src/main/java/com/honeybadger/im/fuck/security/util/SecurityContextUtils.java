@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.util.Optional;
 
 import static org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
 
@@ -33,16 +34,14 @@ public class SecurityContextUtils {
     }
 
     /**
-     * 获取HttpSession中保存的SecurityContext
+     * 获取HttpSession中保存的SecurityContext，程序内部使用
      * @param request
-     * @return
+     * @return 当前登录用户的 {@code SecurityContext}
      */
     public static SecurityContext getSecurityContext(HttpServletRequest request){
         HttpSession httpSession = request.getSession(false);
-        if (httpSession!=null){
-            return (SecurityContext)httpSession.getAttribute(SPRING_SECURITY_CONTEXT_KEY);
-        }
-        return null;
+        //如果不存在SecurityContext，则代表程序异常
+        return (SecurityContext) Optional.ofNullable(httpSession).map(t -> t.getAttribute(SPRING_SECURITY_CONTEXT_KEY)).get();
     }
 
     /**
