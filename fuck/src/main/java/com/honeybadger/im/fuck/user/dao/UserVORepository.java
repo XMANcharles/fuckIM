@@ -10,7 +10,7 @@
  */
 package com.honeybadger.im.fuck.user.dao;
 
-import com.honeybadger.im.fuck.security.userdetails.MyUserDetailsServiceImpl;
+import com.honeybadger.im.fuck.security.core.userdetails.MyUserDetailsServiceImpl;
 import com.honeybadger.im.fuck.user.vo.UserVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -10,7 +10,7 @@
  */
 package com.honeybadger.im.fuck.user.dao;
 
-import com.honeybadger.im.fuck.security.userdetails.MyUserDetailsServiceImpl;
+import com.honeybadger.im.fuck.security.core.userdetails.MyUserDetailsServiceImpl;
 import com.honeybadger.im.fuck.user.vo.GroupFriends;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -29,7 +29,7 @@ public interface GroupFriendsRepository extends JpaRepository<GroupFriends,Strin
     /**
      * 根据Username查找用户，这个方法主要为security框架内容验证流程提供
      * @see MyUserDetailsServiceImpl
-     * @param username 用户名
+     * @param userid 用户id
      * @return 包含用户的权限等信息
      */
     Optional<List<GroupFriends>> findAllByUserId(String userid);

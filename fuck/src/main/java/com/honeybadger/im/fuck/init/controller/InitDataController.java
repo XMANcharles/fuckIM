@@ -12,7 +12,7 @@ package com.honeybadger.im.fuck.init.controller;
 
 import com.honeybadger.im.fuck.common.pojo.LayIMResponseBody;
 import com.honeybadger.im.fuck.init.service.InitDataService;
-import com.honeybadger.im.fuck.security.userdetails.UserExpand;
+import com.honeybadger.im.fuck.security.core.userdetails.UserExpand;
 import com.honeybadger.im.fuck.security.util.SecurityContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
