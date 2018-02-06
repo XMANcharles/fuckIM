@@ -12,7 +12,7 @@ package com.honeybadger.im.fuck.init.service.impl;
 
 import com.honeybadger.im.fuck.init.bean.InitData;
 import com.honeybadger.im.fuck.init.service.InitDataService;
-import com.honeybadger.im.fuck.user.dao.UserDao;
+import com.honeybadger.im.fuck.user.dao.UserRepository;
 import com.honeybadger.im.fuck.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,11 +28,11 @@ import org.springframework.stereotype.Service;
 public class InitDataServiceImpl implements InitDataService {
 
     @Autowired
-    private UserDao userDao;
+    private UserRepository userRepository;
 
     @Override
     public InitData getInitData(String id) {
-        User me = userDao.getOne(id);
+        User me = userRepository.getOne(id);
 
         return new InitData(me);
     }

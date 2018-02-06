@@ -10,12 +10,17 @@
  */
 package com.honeybadger.im.fuck.init.controller;
 
+import com.honeybadger.im.fuck.common.pojo.LayIMResponseBody;
 import com.honeybadger.im.fuck.init.service.InitDataService;
-import com.honeybadger.im.fuck.common.pojo.ResponseEntity;
+import com.honeybadger.im.fuck.security.userdetails.UserExpand;
+import com.honeybadger.im.fuck.security.util.SecurityContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 〈〉
@@ -31,8 +36,10 @@ public class InitDataController {
     private InitDataService initDataService;
 
     @RequestMapping(value = "/initdata",method = RequestMethod.GET)
-    public ResponseEntity getInitData(String id){
-        return ResponseEntity.buildSuccess(initDataService.getInitData(id));
+    public LayIMResponseBody getInitData(HttpServletRequest request){
+        SecurityContext securityContext = SecurityContextUtils.getSecurityContext(request);
+        UserExpand user = (UserExpand) securityContext.getAuthentication().getPrincipal();
+        return LayIMResponseBody.buildSuccess(initDataService.getInitData(user.getId()));
     }
 
 }

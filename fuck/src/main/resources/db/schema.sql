@@ -16,15 +16,16 @@ CREATE TABLE IF NOT EXISTS user_role (
   user_id VARCHAR2(32), --用户id？复合主键吗？感觉不需要
   role_id VARCHAR2(32)  --角色id
 );
-CREATE TABLE IF NOT EXISTS user_relational (
-  id VARCHAR2(32) PRIMARY KEY,
-  user_id VARCHAR2(32),
-  friend_id VARCHAR2(32),
+CREATE TABLE IF NOT EXISTS USER_RELATIONAL (
+  id          VARCHAR2(32) PRIMARY KEY,
+  user_id     VARCHAR2(32),
+  friend_id   VARCHAR2(32),
   friend_note VARCHAR2(32),
-  group_id VARCHAR2(16)
+  group_id    VARCHAR2(32)
 );
 CREATE TABLE IF NOT EXISTS user_group (
-  id INT2 PRIMARY KEY AUTO_INCREMENT, -- UUID不好看，这玩意省事
-  user_id VARCHAR2(32),
-  group_name VARCHAR2(32)
+  ID         VARCHAR2(32) , -- UUID不好看，这玩意省事
+  USER_ID    VARCHAR2(32) ,
+  GROUP_NAME VARCHAR2(32),
+  primary key(ID)
 );

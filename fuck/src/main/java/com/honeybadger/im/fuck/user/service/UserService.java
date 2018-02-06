@@ -1,8 +1,6 @@
 package com.honeybadger.im.fuck.user.service;
 
-import com.honeybadger.im.fuck.tool.Uuid;
-import com.honeybadger.im.fuck.user.dao.UserDao;
-import com.honeybadger.im.fuck.user.entity.User;
+import com.honeybadger.im.fuck.user.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -14,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserService {
 
     @Autowired
-    private UserDao userDao;
+    private UserRepository userDao;
 
     public String userRegistration(String username,String password){
         return "";

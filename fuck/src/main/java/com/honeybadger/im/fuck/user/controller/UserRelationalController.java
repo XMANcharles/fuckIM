@@ -1,7 +1,7 @@
 package com.honeybadger.im.fuck.user.controller;
 
 import com.honeybadger.im.fuck.user.service.UserRelationalService;
-import com.honeybadger.im.fuck.user.vo.UserRelational;
+import com.honeybadger.im.fuck.user.vo.GroupFriends;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,8 @@ import java.util.List;
  * @author zcolder
  * @date 2018/02/01
  */
-@RestController(value = "/UserRelational")
+@RestController
+@RequestMapping(value = "/UserRelational")
 public class UserRelationalController {
 
     @Autowired
@@ -64,7 +65,7 @@ public class UserRelationalController {
      * @return 好友列表
      */
     @RequestMapping(value = "/{userId}/friend")
-    public List<UserRelational> getFriendListByUserId(@PathVariable String userId){
+    public List<GroupFriends> getFriendListByUserId(@PathVariable String userId){
         return userRelationalService.getFriendListByUserId(userId);
     }
 }

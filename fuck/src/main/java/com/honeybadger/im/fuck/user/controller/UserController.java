@@ -11,7 +11,7 @@
 package com.honeybadger.im.fuck.user.controller;
 
 import com.honeybadger.im.fuck.tool.Uuid;
-import com.honeybadger.im.fuck.user.dao.UserDao;
+import com.honeybadger.im.fuck.user.dao.UserRepository;
 import com.honeybadger.im.fuck.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.sound.midi.Soundbank;
 import java.util.List;
 
 /**
@@ -34,16 +33,16 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserDao userDao;
+    private UserRepository userRepository;
 
     @RequestMapping(value = "/users/{id}",method = RequestMethod.GET)
     public User getUser(@PathVariable String id){
-        return userDao.getOne(id);
+        return userRepository.getOne(id);
     }
 
     @RequestMapping(value = "/users",method = RequestMethod.GET)
     public List<User> findAll(){
-        return userDao.findAll();
+        return userRepository.findAll();
     }
 
     /**
