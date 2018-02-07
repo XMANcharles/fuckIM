@@ -21,11 +21,12 @@ CREATE TABLE IF NOT EXISTS USER_RELATIONAL (
   user_id     VARCHAR2(32),
   friend_id   VARCHAR2(32),
   friend_note VARCHAR2(32),
-  group_id    VARCHAR2(32)
+  group_id    VARCHAR2(32),
+  status      VARCHAR2(2)      --双方在为同意好友关系之前，将一直存在一个false的记录，以提醒用户每次上线后处理，（拒绝或者添加）
 );
 CREATE TABLE IF NOT EXISTS user_group (
   ID         VARCHAR2(32) , -- UUID不好看，这玩意省事
   USER_ID    VARCHAR2(32) ,
-  GROUP_NAME VARCHAR2(32),
+  GROUP_NAME VARCHAR2(32) ,
   primary key(ID)
 );

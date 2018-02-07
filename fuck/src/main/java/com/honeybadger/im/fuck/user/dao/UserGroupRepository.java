@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author zcolder
  * @date 2018/02/04
  */
-public interface UserGroupDao extends JpaRepository<UserGroup,String> {
+public interface UserGroupRepository extends JpaRepository<UserGroup,String> {
 }

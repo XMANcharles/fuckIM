@@ -97,4 +97,13 @@ public class User implements Serializable {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
+    public User(String id, String username, String password, Boolean status, String sign, String avatar) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.status = status;
+        this.sign = sign;
+        this.avatar = avatar;
+    }
 }

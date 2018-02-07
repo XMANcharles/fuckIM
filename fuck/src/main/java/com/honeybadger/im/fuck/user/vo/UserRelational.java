@@ -47,6 +47,9 @@ public class UserRelational implements Serializable {
     @Column(name = "group_id")
     private int groupId;
 
+    @Column(name = "status")
+    private String status;
+
     /**
      * 封装好友信息(将联表所查询到的user id对应信息封印在此)
      */
@@ -100,5 +103,13 @@ public class UserRelational implements Serializable {
 
     public void setFriendInfo(User friendInfo) {
         this.friendInfo = friendInfo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

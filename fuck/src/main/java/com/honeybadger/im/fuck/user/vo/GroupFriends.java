@@ -89,4 +89,12 @@ public class GroupFriends implements Serializable {
         this.users = users;
     }
 
+    public GroupFriends() {
+    }
+
+    public GroupFriends(String id,String userId, String groupname) {
+        this.id = id;
+        this.userId = userId;
+        this.groupname = groupname;
+    }
 }
