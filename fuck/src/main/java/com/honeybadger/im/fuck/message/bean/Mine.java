@@ -14,6 +14,9 @@ import java.io.Serializable;
 
 /**
  * 包含我的信息
+ * @author Neo Geng
+ * @date 2018/1/20
+ * @since 1.0.0
  */
 public class Mine implements Serializable {
     /**

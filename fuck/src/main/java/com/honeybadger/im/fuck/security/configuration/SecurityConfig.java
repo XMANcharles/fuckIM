@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -32,7 +31,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * @since 1.0.0
  */
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Qualifier(value = "myUserDetailsServiceImpl")
@@ -56,12 +55,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().headers().frameOptions().sameOrigin();
     }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        // Web层面的配置，一般用来配置无需安全检查的路径
-        //但是SpringBoot会默认配置常用的(/css/**, /js/**, /images/**, /webjars/** and **/favicon.ico).如果不够用，可以自定义
-        //web.ignoring().mvcMatchers("/webjars/**","/js/**", "/css/**", "/images/**", "/**/favicon.ico");
-    }
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        // Web层面的配置，一般用来配置无需安全检查的路径
+//        //但是SpringBoot会默认配置常用的(/css/**, /js/**, /images/**, /webjars/** and **/favicon.ico).如果不够用，可以自定义
+//        web.ignoring().mvcMatchers("/webjars/**","/js/**", "/css/**", "/images/**", "/**/favicon.ico");
+//    }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {

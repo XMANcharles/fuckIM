@@ -50,7 +50,6 @@ public class RabbitMqConfigurer {
     public void processReceive(Message content) {
         System.out.println("读取到"+content);
         //模拟发送给用户
-        //String sessionId = WebSocketMessageBrokerConfigurer.users.get("guest");
         simpMessagingTemplate.convertAndSendToUser(content.getTo().getId(),"/queue/position-updates",content);
     }
 

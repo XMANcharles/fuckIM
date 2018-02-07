@@ -116,4 +116,17 @@ public class UserVO implements Serializable {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+
+    @Override
+    public String toString() {
+        return "UserVO{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", status=" + status +
+                ", sign='" + sign + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }
