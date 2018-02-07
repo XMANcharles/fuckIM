@@ -10,7 +10,7 @@
  */
 package com.honeybadger.im.fuck.user.dao;
 
-import com.honeybadger.im.fuck.security.core.userdetails.MyUserDetailsServiceImpl;
+import com.honeybadger.im.fuck.security.userdetails.MyUserDetailsServiceImpl;
 import com.honeybadger.im.fuck.user.vo.UserVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -20,7 +20,7 @@ import java.util.Optional;
  * 〈〉
  *
  * @author Neo Geng
- * Date 2018/1/20
+ * @date 2018/1/20
  * @since 1.0.0
  */
 public interface UserVORepository extends JpaRepository<UserVO,String> {
