@@ -10,7 +10,6 @@
  */
 package com.honeybadger.im.fuck.user.dao;
 
-import com.honeybadger.im.fuck.security.core.userdetails.MyUserDetailsServiceImpl;
 import com.honeybadger.im.fuck.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -26,9 +25,8 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User,String> {
 
     /**
-     * 根据Username查找用户，这个方法主要为security框架内容验证流程提供
-     * @see MyUserDetailsServiceImpl
-     * @param username
+     * 根据Username查找用户
+     * @param username 用户名
      * @return
      */
     Optional<User> findByUsername(String username);
