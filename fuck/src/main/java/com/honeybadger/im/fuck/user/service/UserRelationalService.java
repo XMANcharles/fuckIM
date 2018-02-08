@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author zcolder
@@ -22,13 +21,6 @@ import java.util.Optional;
  */
 @Service
 public class UserRelationalService {
-    /**
-     * 尚未成立好友关系的状态码
-     * 状态在未来应该设计为一个枚举类
-     * 此处不考虑了
-     */
-    private static final String NO = "no";
-
     /**
      * 没有任何好友备注
      */
@@ -44,8 +36,17 @@ public class UserRelationalService {
 
     /**
      * 通过用户ID拉取好友列表
-     * @param userId 。。
-     * @return 。。
+     * @param userId 用户ID
+     * @return List<GroupFriends>
+     *                 这里的设计并不合理，用户表的获取，应该用某种数据结构来拒绝，避免多
+     *                 次对数据库的全表扫描应该通过用户id一次性获取整个用户关系列表， 再
+     *                 一次性获取整个用户分组列表，然后用groupId进行对比，分别将从用户
+     *                 关系表中查出的用户塞入对应的分组中，然后将其从原有的集合中删除(类
+     *                 似弹出栈操作)最后，原有集合中的剩余用户，即没被明确处理关系的孤儿
+     *                 用户，对该集合中的用户信息重新过滤，发向用户的待处理项等待处理或者
+     *                 被忽视。
+     *                 <h1>一切用户所需要信息都应该在用户登陆的时候拉取完成，无论会让用
+     *                 户等多久。尽量让用户在"登陆后--下线前"，只需要聊天服务。</h1>
      */
     public List<GroupFriends> getFriendListByUserId(String userId){
         //用户ID获取好友分组
@@ -64,6 +65,7 @@ public class UserRelationalService {
                 user.setPassword("");
                 userList.add(user);
             }
+            //填入
             groupFriends.setUsers(userList);
         }
         return groupFriendsList;
@@ -82,10 +84,10 @@ public class UserRelationalService {
     @Transactional
     public void userRequestsToAddFriends(String userId,String groupId,String friendId){
         //为申请方添加好友关系 applicant(申请人)
-        UserRelational applicant = new UserRelational(Uuid.getUUID(),userId,friendId,KONG,groupId,NO);
+        UserRelational applicant = new UserRelational(Uuid.getUUID(),userId,friendId,KONG,groupId,UserRelationalStatus.Stranger.getValue());
         userRelationalRepository.save(applicant);
         //为被申请方添加好友关系 respondent(被调查者)
-        UserRelational respondent = new UserRelational(Uuid.getUUID(),friendId,userId,KONG,null,NO);
+        UserRelational respondent = new UserRelational(Uuid.getUUID(),friendId,userId,KONG,null,UserRelationalStatus.Stranger.getValue());
         userRelationalRepository.save(respondent);
         /*
         这里本身需要做一件事，但没有现在不考虑了
