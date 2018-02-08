@@ -11,6 +11,9 @@
 <div class="layui-main" layout:fragment="content">
     <header class="layui-elip">登录</header>
     <form class="layui-form" method="post" action="/login">
+        <div id="errorMessage" class="layui-input-inline" th:if="${param.error}">
+            <span class="card-title">Invalid user name or password</span>
+        </div>
         <div class="layui-input-inline">
             <input type="text" name="username" required lay-verify="required" placeholder="用户名|邮箱|手机号"
                    autocomplete="off" class="layui-input">
