@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -44,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //配置许可的URL&&除此之外全部认证
                 .mvcMatchers("/").permitAll().anyRequest().authenticated()
                 //启动FormLogin
-                .and().formLogin().defaultSuccessUrl("/")
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll()
                 //配置logout
                 .and().logout().logoutUrl("/logout")
                 //配置Session
@@ -55,12 +56,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().headers().frameOptions().sameOrigin();
     }
 
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        // Web层面的配置，一般用来配置无需安全检查的路径
-//        //但是SpringBoot会默认配置常用的(/css/**, /js/**, /images/**, /webjars/** and **/favicon.ico).如果不够用，可以自定义
-//        web.ignoring().mvcMatchers("/webjars/**","/js/**", "/css/**", "/images/**", "/**/favicon.ico");
-//    }
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        // Web层面的配置，一般用来配置无需安全检查的路径
+        //但是SpringBoot会默认配置常用的(/css/**, /js/**, /images/**, /webjars/** and **/favicon.ico).如果不够用，可以自定义，确实不够用了现在~~~
+        web.ignoring().mvcMatchers("/webjars/**","/js/**", "/css/**", "/images/**", "/**/favicon.ico","/layui/**");
+    }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {

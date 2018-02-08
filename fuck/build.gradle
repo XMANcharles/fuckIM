@@ -53,6 +53,11 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'com.h2database:h2'
 
+    /*Thymeleaf Start*/
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.2.2')
+    compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.2.RELEASE')
+    /*Thymeleaf End*/
 
 	//WebJars
 	compile 'org.webjars:sockjs-client:1.0.0'

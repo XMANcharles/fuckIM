@@ -14,7 +14,8 @@ INSERT INTO USER_ROLE VALUES ('0002', '0001', '0003');
 INSERT INTO USER_ROLE VALUES ('0003', '0002', '0003');
 
 --USER_RELATION
-INSERT INTO user_relational VALUES ('0001', '0001', '0002','摇就完事了','000001');
+INSERT INTO user_relational VALUES ('0001', '0001', '0002','摇就完事了','000001','FF' );
+INSERT INTO user_relational VALUES ('0002', '0002', '0001','帅气小哥哥','000002','FF' );
 
 --USER_GROUP
 INSERT INTO user_group VALUES ('000001','0001', '我渴望奶子');
