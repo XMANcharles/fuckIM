@@ -51,7 +51,7 @@ public class GroupFriendsService {
      */
     public boolean deleteGroup(String groupId){
         //如果删除的分组存在好友
-        if(userRelationalRepository.findAllByGroupId(groupId).size()>=1){
+        if(userRelationalRepository.findAllByGroupId(groupId).orElse(null).size()>=1){
             return false;
         }
         //否则删除分组

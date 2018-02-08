@@ -52,8 +52,7 @@ public class UserService {
      */
     @Transactional
     public boolean userRegistration(String username,String password){
-        //检查用户名合法性
-        //另外写
+        //检查用户名合法性 暂时不写
         String userUUID = Uuid.getUUID();
         User user = new User(userUUID, username, password, INTT_STATUS, INIT_SIGN, INIT_AVATAR);
         userRepository.save(user);
@@ -68,6 +67,7 @@ public class UserService {
      * @param username 用户名
      * @return {@code true} 合法，否则{@code false}
      */
+    @Deprecated
     public boolean checkUserName(String username){
         //用户名存在
         if(userRepository.findByUsername(username).isPresent()){

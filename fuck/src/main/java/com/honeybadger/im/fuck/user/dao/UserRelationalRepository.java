@@ -2,8 +2,10 @@ package com.honeybadger.im.fuck.user.dao;
 
 import com.honeybadger.im.fuck.user.vo.UserRelational;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author zcolder
@@ -22,5 +24,11 @@ public interface UserRelationalRepository extends JpaRepository<UserRelational,S
      * @param groupId 组ID
      * @return 好友列表
      */
-    List<UserRelational> findAllByGroupId(String groupId);
+    Optional<List<UserRelational>> findAllByGroupId(String groupId);
+
+    @Query("UPDATE UserRelational AS ur SET ur.groupId=:groupId,ur.status=:status WHERE ur.userId=:userId AND ur.friendId=:friendId")
+    void updateUserRelational(String userId,String friendId,String groupId,String status);
+
+    @Query("UPDATE UserRelational AS ur SET ur.status=:status WHERE ur.userId=:userId AND ur.friendId=:friendId")
+    void updateUserRelational(String userId,String friendId,String status);
 }

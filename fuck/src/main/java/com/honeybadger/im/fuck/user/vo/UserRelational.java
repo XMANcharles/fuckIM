@@ -45,8 +45,11 @@ public class UserRelational implements Serializable {
      * 好友所在分组的id(此处应该有一个默认值)
      */
     @Column(name = "group_id")
-    private int groupId;
+    private String groupId;
 
+    /**
+     * 好友状态，黑名单或者特关
+     */
     @Column(name = "status")
     private String status;
 
@@ -89,11 +92,11 @@ public class UserRelational implements Serializable {
         this.friendNote = friendNote;
     }
 
-    public int getGroupId() {
+    public String getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(int groupId) {
+    public void setGroupId(String groupId) {
         this.groupId = groupId;
     }
 
@@ -110,6 +113,15 @@ public class UserRelational implements Serializable {
     }
 
     public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public UserRelational(String id, String userId, String friendId, String friendNote, String groupId, String status) {
+        this.id = id;
+        this.userId = userId;
+        this.friendId = friendId;
+        this.friendNote = friendNote;
+        this.groupId = groupId;
         this.status = status;
     }
 }
