@@ -35,11 +35,20 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * 获取User
+     * @param id UserId
+     * @return User-如果找到
+     */
     @RequestMapping(value = "/users/{id}",method = RequestMethod.GET)
     public User getUser(@PathVariable String id){
         return userRepository.getOne(id);
     }
 
+    /**
+     * 获取Uses
+     * @return 所有用户集合
+     */
     @RequestMapping(value = "/users",method = RequestMethod.GET)
     public List<User> findAll(){
         return userRepository.findAll();
@@ -53,10 +62,12 @@ public class UserController {
      */
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public void userRegistration(@PathVariable String username,
-                                 @PathVariable String password){
+                                 @PathVariable String password) throws Exception {
+        userRepository.findByUsername(username).orElseThrow(()->new Exception("用户已注册！"));
         User user = new User();
         user.setId(Uuid.getUUID());
         user.setUsername(username);
+        //考虑是否需要将BCryptPasswordEncoder设为单例，交由Spring Bean
         user.setPassword(new BCryptPasswordEncoder().encode(password));
     }
 

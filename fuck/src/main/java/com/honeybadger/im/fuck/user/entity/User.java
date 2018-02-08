@@ -50,6 +50,10 @@ public class User implements Serializable {
     @Column
     private String avatar;
 
+    public User() {
+
+    }
+
     public String getId() {
         return id;
     }

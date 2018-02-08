@@ -11,6 +11,20 @@
  * WebSocket页面配置
  */
 $(function () {
+
+    //CSRF
+    var headers = {};
+    var _csrf;
+    $.ajax({
+        url: "/csrf",
+        type: "GET",
+        async: false,
+        success: function (data) {
+            headers[data.headerName] = data.token;
+            _csrf = data.token;
+        }
+    });
+
     /**
      * Layer的配置
      */
@@ -33,13 +47,13 @@ $(function () {
 
             //上传图片接口（返回的数据格式见下文），若不开启图片上传，剔除该项即可
             , uploadImage: {
-                url: '' //接口地址
+                url: '/picture?_csrf='+_csrf //接口地址
                 , type: 'post' //默认post
             }
 
             //上传文件接口（返回的数据格式见下文），若不开启文件上传，剔除该项即可
             , uploadFile: {
-                url: '' //接口地址
+                url: '/resource/file' //接口地址
                 , type: 'post' //默认post
             }
 
@@ -50,9 +64,9 @@ $(function () {
                 , icon: '&#xe64e;' //工具图标，参考图标文档
             }]
 
-            , msgbox: layui.cache.dir + 'css/modules/layim/html/msgbox.html' //消息盒子页面地址，若不开启，剔除该项即可
-            , find: layui.cache.dir + 'css/modules/layim/html/find.html' //发现页面地址，若不开启，剔除该项即可
-            , chatLog: layui.cache.dir + 'css/modules/layim/html/chatlog.html' //聊天记录页面地址，若不开启，剔除该项即可
+            , msgbox: '/layui/css/modules/layim/html/msgbox.html' //消息盒子页面地址，若不开启，剔除该项即可
+            , find: '/layui/css/modules/layim/html/find.html' //发现页面地址，若不开启，剔除该项即可
+            , chatLog:  '/layui/css/modules/layim/html/chatlog.html' //聊天记录页面地址，若不开启，剔除该项即可
         }).chat({
             name: "如风如梦"
             , type: 'friend'
@@ -65,19 +79,6 @@ $(function () {
         // 开启socket连接
         var socket = new SockJS("http://localhost/socket");
         stompClient = Stomp.over(socket);
-
-        //CSRF
-        var headers = {};
-        $.ajax({
-            url: "/csrf",
-            type: "GET",
-            async: false,
-            success: function (data) {
-                headers[data.headerName] = data.token;
-            }
-        });
-
-
         stompClient.connect(headers, function (frame) {
             console.log('*****  Connected  *****');
             //订阅消息队列。。。

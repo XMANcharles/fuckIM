@@ -6,7 +6,7 @@
     <!-- 开发环境. 多个使用逗号隔开. -->
     <springProfile name="dev">
         <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <File>./fuck/log/WebSocket.log</File>
+            <File>./log/WebSocket.log</File>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
                 <!-- daily rollover -->
                 <FileNamePattern>logFile.%d{yyyy-MM-dd}.log</FileNamePattern>
@@ -23,9 +23,12 @@
         <logger name="com.honeybadger.fuck" level="DEBUG">
             <appender-ref ref="FILE"/>
         </logger>
-        <root level="INFO">
+        <logger name="org.springframework" level="WARN">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="FILE"/>
+        </logger>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
         </root>
     </springProfile>
 
