@@ -25,6 +25,7 @@ public class UserRelationalService {
      * 没有任何好友备注
      */
     private static final String KONG = "";
+
     @Autowired
     private GroupFriendsRepository groupFriendsRepository;
 
@@ -52,6 +53,8 @@ public class UserRelationalService {
         //用户ID获取好友分组
         List<GroupFriends> groupFriendsList = groupFriendsRepository.findAllByUserId(userId).orElse(null);
 
+        User user;
+
         for (GroupFriends groupFriends : groupFriendsList) {
             //用好友分组的ID去获取好友关系列表
             List<UserRelational> userRelationalList = userRelationalRepository.findAllByGroupId(groupFriends.getId()).orElse(null);
@@ -60,7 +63,7 @@ public class UserRelationalService {
             for (UserRelational userRelational:userRelationalList) {
                 //从好友关系中去获取对应的好友信息
                 //这里本来应该用的UserVo而且是不带密码属性的
-                User user = userRepository.getOne(userRelational.getFriendId());
+                user = userRepository.getOne(userRelational.getFriendId());
                 //手动的置空密码
                 user.setPassword("");
                 userList.add(user);

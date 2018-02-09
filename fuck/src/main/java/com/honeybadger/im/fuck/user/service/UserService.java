@@ -4,6 +4,7 @@ import com.honeybadger.im.fuck.tool.Uuid;
 import com.honeybadger.im.fuck.user.dao.UserRepository;
 import com.honeybadger.im.fuck.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,38 +49,16 @@ public class UserService {
      * 用户注册
      * @param username 用户名
      * @param password 用户密码
-     * @return {@code true} 注册成功，否则{@code false}
      */
     @Transactional
-    public boolean userRegistration(String username,String password){
+    public void userRegistration(String username,String password){
         //检查用户名合法性 暂时不写
         String userUUID = Uuid.getUUID();
-        User user = new User(userUUID, username, password, INTT_STATUS, INIT_SIGN, INIT_AVATAR);
+        User user = new User(userUUID, username, new BCryptPasswordEncoder().encode(password), INTT_STATUS, INIT_SIGN, INIT_AVATAR);
         userRepository.save(user);
         //为用户初始化两个好友分组，我的好友，黑名单
         groupFriendsService.addGroup(userUUID,MY_GOOD_FRIEND);
         groupFriendsService.addGroup(userUUID,BLACK_LIST);
-        return true;
     }
-
-    /**
-     * 检查用户名合法性
-     * @param username 用户名
-     * @return {@code true} 合法，否则{@code false}
-     */
-    @Deprecated
-    public boolean checkUserName(String username){
-        //用户名存在
-        if(userRepository.findByUsername(username).isPresent()){
-            return false;
-        }
-        int usernameLength = username.length();
-        //用户名长度
-        if (usernameLength > 32 || usernameLength < 1){
-            return false;
-        }
-        return true;
-    }
-
 
 }
