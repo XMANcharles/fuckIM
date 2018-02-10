@@ -3,6 +3,7 @@ package com.honeybadger.im.fuck.user.dao;
 import com.honeybadger.im.fuck.user.vo.UserRelational;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +18,7 @@ public interface UserRelationalRepository extends JpaRepository<UserRelational,S
      * @param userId 用户id
      * @return 用户关系列表
      */
-    List<UserRelational> findAllByUserId(String userId);
+    Optional<List<UserRelational>> findAllByUserId(String userId);
 
     /**
      * 根据分组返回所在分组的好友
@@ -26,9 +27,20 @@ public interface UserRelationalRepository extends JpaRepository<UserRelational,S
      */
     Optional<List<UserRelational>> findAllByGroupId(String groupId);
 
-    @Query("UPDATE UserRelational AS ur SET ur.groupId=:groupId,ur.status=:status WHERE ur.userId=:userId AND ur.friendId=:friendId")
-    void updateUserRelational(String userId,String friendId,String groupId,String status);
+//    @Query("UPDATE UserRelational AS ur SET ur.groupId=:groupId,ur.status=:status WHERE ur.userId=:userId AND ur.friendId=:friendId")
+//    void updateUserRelational(String userId,String friendId,String groupId,String status);
+//
+//    @Query("UPDATE UserRelational AS ur SET ur.status=:status WHERE ur.userId=:userId AND ur.friendId=:friendId")
+//    void updateUserRelational(String userId,String friendId,String status);
 
-    @Query("UPDATE UserRelational AS ur SET ur.status=:status WHERE ur.userId=:userId AND ur.friendId=:friendId")
-    void updateUserRelational(String userId,String friendId,String status);
+    /**
+     * 为指定用户的其中一个分组的好友转移到另一个分组
+     * @param userId 用户Id
+     * @param fromGroupId 被转移的分组
+     * @param toGroupId 被转进的分组
+     */
+    @Query("UPDATE UserRelational AS ur SET ur.groupId=:toGroupId WHERE ur.userId=:userId AND ur.groupId=:fromGroupId")
+    void groupFriendTeleport(@Param("userId")String userId, @Param("fromGroupId") String fromGroupId, @Param("toGroupId") String toGroupId);
+
+
 }

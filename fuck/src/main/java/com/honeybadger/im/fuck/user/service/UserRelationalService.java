@@ -5,14 +5,12 @@ import com.honeybadger.im.fuck.tool.Uuid;
 import com.honeybadger.im.fuck.user.dao.GroupFriendsRepository;
 import com.honeybadger.im.fuck.user.dao.UserRelationalRepository;
 import com.honeybadger.im.fuck.user.dao.UserRepository;
-import com.honeybadger.im.fuck.user.entity.User;
 import com.honeybadger.im.fuck.user.vo.GroupFriends;
 import com.honeybadger.im.fuck.user.vo.UserRelational;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +22,7 @@ public class UserRelationalService {
     /**
      * 没有任何好友备注
      */
-    private static final String KONG = "";
+    private static final String NULL_OF_STRING = "";
 
     @Autowired
     private GroupFriendsRepository groupFriendsRepository;
@@ -52,25 +50,27 @@ public class UserRelationalService {
     public List<GroupFriends> getFriendListByUserId(String userId){
         //用户ID获取好友分组
         List<GroupFriends> groupFriendsList = groupFriendsRepository.findAllByUserId(userId).orElse(null);
-
-        User user;
-
-        for (GroupFriends groupFriends : groupFriendsList) {
-            //用好友分组的ID去获取好友关系列表
-            List<UserRelational> userRelationalList = userRelationalRepository.findAllByGroupId(groupFriends.getId()).orElse(null);
-            //创建一个好友列表实例
-            List<User> userList = new ArrayList<>();
-            for (UserRelational userRelational:userRelationalList) {
-                //从好友关系中去获取对应的好友信息
-                //这里本来应该用的UserVo而且是不带密码属性的
-                user = userRepository.getOne(userRelational.getFriendId());
-                //手动的置空密码
-                user.setPassword("");
-                userList.add(user);
-            }
-            //填入
-            groupFriends.setUsers(userList);
-        }
+        //用户ID获取好友关系表
+        List<UserRelational> userRelationalList = userRelationalRepository.findAllByUserId(userId).orElse(null);
+//
+//        User user;
+//
+//        for (GroupFriends groupFriends : groupFriendsList) {
+//            //用好友分组的ID去获取好友关系列表
+//            List<UserRelational> userRelationalList = userRelationalRepository.findAllByGroupId(groupFriends.getId()).orElse(null);
+//            //创建一个好友列表实例
+//            List<User> userList = new ArrayList<>();
+//            for (UserRelational userRelational:userRelationalList) {
+//                //从好友关系中去获取对应的好友信息
+//                //这里本来应该用的UserVo而且是不带密码属性的
+//                user = userRepository.getOne(userRelational.getFriendId());
+//                //手动的置空密码
+//                user.setPassword("");
+//                userList.add(user);
+//            }
+//            //填入
+//            groupFriends.setUsers(userList);
+//        }
         return groupFriendsList;
     }
 
@@ -87,10 +87,10 @@ public class UserRelationalService {
     @Transactional
     public void userRequestsToAddFriends(String userId,String groupId,String friendId){
         //为申请方添加好友关系 applicant(申请人)
-        UserRelational applicant = new UserRelational(Uuid.getUUID(),userId,friendId,KONG,groupId,UserRelationalStatus.Stranger.getValue());
+        UserRelational applicant = new UserRelational(Uuid.getUUID(),userId,friendId, NULL_OF_STRING,groupId,UserRelationalStatus.Stranger.getValue());
         userRelationalRepository.save(applicant);
         //为被申请方添加好友关系 respondent(被调查者)
-        UserRelational respondent = new UserRelational(Uuid.getUUID(),friendId,userId,KONG,null,UserRelationalStatus.Stranger.getValue());
+        UserRelational respondent = new UserRelational(Uuid.getUUID(),friendId,userId, NULL_OF_STRING,null,UserRelationalStatus.Stranger.getValue());
         userRelationalRepository.save(respondent);
         /*
         这里本身需要做一件事，但没有现在不考虑了
@@ -119,7 +119,7 @@ public class UserRelationalService {
      */
     public void forcedAddFriend(String userId,String groupId,String friendId){
         //为申请方添加好友关系 applicant(申请人)
-        UserRelational applicant = new UserRelational(Uuid.getUUID(),userId,friendId,KONG,groupId,UserRelationalStatus.GoodFriend.getValue());
+        UserRelational applicant = new UserRelational(Uuid.getUUID(),userId,friendId, NULL_OF_STRING,groupId,UserRelationalStatus.GoodFriend.getValue());
         userRelationalRepository.save(applicant);
         /*
            为被申请方添加好友关系 respondent(被调查者)
@@ -127,7 +127,19 @@ public class UserRelationalService {
            只有被申请人选择了，要添加的分组，才会在列表中显示该好友，但实际上，申请人和被申请人是可以聊天的
            只是在分组中没有申请人的账号
          */
-        UserRelational respondent = new UserRelational(Uuid.getUUID(),friendId,userId,KONG,null, UserRelationalStatus.Stranger.getValue());
+        UserRelational respondent = new UserRelational(Uuid.getUUID(),friendId,userId, NULL_OF_STRING,null, UserRelationalStatus.Stranger.getValue());
         userRelationalRepository.save(respondent);
+    }
+
+    /**
+     * 将指定用户的指定分组好友转移向另一个分组
+     * 之所以在(UserRelationalService)是因为它是对用户关系之间的一个操作，而不是对分组的操作
+     * @param userId 用户Id
+     * @param fromGroupId 要被转出的分组
+     * @param toGroupId 要被转入的分组
+     * @return {@code true}转移成功,否则{@code false}转移失败.
+     */
+    public void Group(String userId, String fromGroupId, String toGroupId){
+        userRelationalRepository.groupFriendTeleport(userId, fromGroupId, toGroupId);
     }
 }

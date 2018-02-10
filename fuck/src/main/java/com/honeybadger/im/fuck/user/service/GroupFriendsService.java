@@ -25,9 +25,14 @@ public class GroupFriendsService {
 
     @Autowired
     private UserRelationalRepository userRelationalRepository;
+    /**
+     * 特殊对待的一项或多项
+     */
+    private final static String BLACK_LIST = "黑名单";
 
     /**
      * 为指定用户添加好友分组
+     * 如果添加的分组是黑名单，则将groupId人为的置为"黑名单"
      * @param userId 用户的ID
      * @param groupName 分组的名字
      * @return {@code true} 添加成功，否则{@code false}
@@ -37,8 +42,15 @@ public class GroupFriendsService {
         if(!userVORepository.findById(userId).isPresent()){
             return false;
         }
+        String UUID;
+        //是否创建黑名单
+        if(BLACK_LIST.equals(groupName)){
+            UUID = BLACK_LIST;
+        }else{
+            UUID = Uuid.getUUID();
+        }
         //添加分组
-        groupFriendsRepository.save(new GroupFriends(Uuid.getUUID(),userId,groupName));
+        groupFriendsRepository.save(new GroupFriends(UUID,userId,groupName));
         return true;
     }
 
@@ -54,6 +66,10 @@ public class GroupFriendsService {
         if(userRelationalRepository.findAllByGroupId(groupId).orElse(null).size()>=1){
             return false;
         }
+        //如果删除的是黑名单
+        if(BLACK_LIST.equals(groupId)){
+            return false;
+        }
         //否则删除分组
         groupFriendsRepository.deleteById(groupId);
         return true;
@@ -65,7 +81,11 @@ public class GroupFriendsService {
      * @param groupName 新的分组名字
      * @return {@code true} 更新成功，否则{@code false}
      */
-    public boolean update(String groupId,String groupName){
+    public boolean updateGroupName(String groupId,String groupName){
+        //不允许修改黑名单的名字
+        if (BLACK_LIST.equals(groupId)){
+            return false;
+        }
         GroupFriends groupFriends = groupFriendsRepository.save(new GroupFriends(null,groupId,groupName));
         return true;
     }

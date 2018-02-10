@@ -12,6 +12,7 @@ package com.honeybadger.im.fuck.user.dao;
 
 import com.honeybadger.im.fuck.user.vo.GroupFriends;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,5 +33,11 @@ public interface GroupFriendsRepository extends JpaRepository<GroupFriends, Stri
      * @return 包含用户的权限等信息
      */
     Optional<List<GroupFriends>> findAllByUserId(String userId);
+
+    /**
+     * @return 返回表中对应用户的记录数
+     */
+    @Query("SELECT COUNT(userId) FROM GroupFriends")
+    int findAllByUserId();
 
 }

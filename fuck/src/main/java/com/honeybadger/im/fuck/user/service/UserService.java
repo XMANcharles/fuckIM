@@ -37,7 +37,7 @@ public class UserService {
     /**
      * 初始化头像
      */
-    private final static String INIT_AVATAR = "路径还没有";
+    private final static String INIT_AVATAR = "http://tp1.sinaimg.cn/5619439268/180/40030060651/1";
 
     @Autowired
     private UserRepository userRepository;
