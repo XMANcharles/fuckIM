@@ -50,7 +50,7 @@ public class RabbitMqConfigurer {
     public void processReceive(Message content) {
         System.out.println("读取到"+content);
         //模拟发送给用户
-        simpMessagingTemplate.convertAndSendToUser(content.getTo().getId(),"/queue/position-updates",content);
+        simpMessagingTemplate.convertAndSendToUser(content.getTo().getName(),"/queue/position-updates",content);
     }
 
 }
