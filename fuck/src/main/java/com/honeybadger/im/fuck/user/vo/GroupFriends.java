@@ -21,9 +21,9 @@ import java.util.List;
 /**
  * 〈分组好友对象〉
  * 针对每个分组，保存分组下所有的好友信息
- *
+ * 只有好友才能存在分组中
  * @author Neo Geng
- * Date 2018/2/5
+ * @date 2018/2/5
  * @since 1.0.0
  */
 @Entity

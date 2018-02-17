@@ -124,4 +124,7 @@ public class UserRelational implements Serializable {
         this.groupId = groupId;
         this.status = status;
     }
+
+    public UserRelational() {
+    }
 }

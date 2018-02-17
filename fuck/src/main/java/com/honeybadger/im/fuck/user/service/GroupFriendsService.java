@@ -2,15 +2,16 @@ package com.honeybadger.im.fuck.user.service;
 
 import com.honeybadger.im.fuck.tool.Uuid;
 import com.honeybadger.im.fuck.user.dao.GroupFriendsRepository;
-import com.honeybadger.im.fuck.user.dao.UserGroupRepository;
 import com.honeybadger.im.fuck.user.dao.UserRelationalRepository;
 import com.honeybadger.im.fuck.user.dao.UserVORepository;
 import com.honeybadger.im.fuck.user.vo.GroupFriends;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
- * 用户组的管理
+ * 用户组的管理(包括用户好友的拉取)
  * @author zcolder
  * @date 2018/02/07
  */
@@ -25,10 +26,6 @@ public class GroupFriendsService {
 
     @Autowired
     private UserRelationalRepository userRelationalRepository;
-    /**
-     * 特殊对待的一项或多项
-     */
-    private final static String BLACK_LIST = "黑名单";
 
     /**
      * 为指定用户添加好友分组
@@ -42,15 +39,8 @@ public class GroupFriendsService {
         if(!userVORepository.findById(userId).isPresent()){
             return false;
         }
-        String UUID;
-        //是否创建黑名单
-        if(BLACK_LIST.equals(groupName)){
-            UUID = BLACK_LIST;
-        }else{
-            UUID = Uuid.getUUID();
-        }
         //添加分组
-        groupFriendsRepository.save(new GroupFriends(UUID,userId,groupName));
+        groupFriendsRepository.save(new GroupFriends(Uuid.getUUID(),userId,groupName));
         return true;
     }
 
@@ -66,10 +56,6 @@ public class GroupFriendsService {
         if(userRelationalRepository.findAllByGroupId(groupId).orElse(null).size()>=1){
             return false;
         }
-        //如果删除的是黑名单
-        if(BLACK_LIST.equals(groupId)){
-            return false;
-        }
         //否则删除分组
         groupFriendsRepository.deleteById(groupId);
         return true;
@@ -81,12 +67,18 @@ public class GroupFriendsService {
      * @param groupName 新的分组名字
      * @return {@code true} 更新成功，否则{@code false}
      */
-    public boolean updateGroupName(String groupId,String groupName){
-        //不允许修改黑名单的名字
-        if (BLACK_LIST.equals(groupId)){
-            return false;
-        }
-        GroupFriends groupFriends = groupFriendsRepository.save(new GroupFriends(null,groupId,groupName));
-        return true;
+    public void updateGroupName(String groupId,String groupName){
+        groupFriendsRepository.save(new GroupFriends(null,groupId,groupName));
     }
+
+    /**
+     * 通过用户ID拉取好友列表
+     * @param userId 用户ID
+     * @return List<GroupFriends>
+     */
+    public List<GroupFriends> getFriendListByUserId(String userId){
+        //用户ID获取好友分组
+        return groupFriendsRepository.findAllByUserId(userId).orElse(null);
+    }
+
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
+ * 处理用户关系
  * @author zcolder
  * @date 2018/02/01
  */
@@ -59,13 +60,4 @@ public class UserRelationalController {
 
     }
 
-    /**
-     * 获取好友列表
-     * @param userId 用户ID
-     * @return 好友列表
-     */
-    @RequestMapping(value = "/{userId}/friend")
-    public List<GroupFriends> getFriendListByUserId(@PathVariable String userId){
-        return userRelationalService.getFriendListByUserId(userId);
-    }
 }

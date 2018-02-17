@@ -6,9 +6,6 @@ import com.honeybadger.im.fuck.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 /**
  * 这个类将用来检测注册用户合法性
@@ -22,10 +19,6 @@ public class UserService {
      * 默认初始一个好友分组(我的好友)
      */
     private final static String MY_GOOD_FRIEND = "我的好友";
-    /**
-     * 默认初始一个黑名单分组(黑名单)
-     */
-    private final static String BLACK_LIST = "黑名单";
     /**
      * 初始化在线状态
      */
@@ -50,7 +43,6 @@ public class UserService {
      * @param username 用户名
      * @param password 用户密码
      */
-    @Transactional
     public void userRegistration(String username,String password){
         //检查用户名合法性 暂时不写
         String userUUID = Uuid.getUUID();
@@ -58,7 +50,6 @@ public class UserService {
         userRepository.save(user);
         //为用户初始化两个好友分组，我的好友，黑名单
         groupFriendsService.addGroup(userUUID,MY_GOOD_FRIEND);
-        groupFriendsService.addGroup(userUUID,BLACK_LIST);
     }
 
 }
