@@ -16,6 +16,8 @@ CREATE TABLE IF NOT EXISTS user_role (
   user_id VARCHAR2(32), --用户id？复合主键吗？感觉不需要
   role_id VARCHAR2(32)  --角色id
 );
+-- USER_RELATIONAL表中的friend_id 命名并不妥，实际的用户关系已经改由表中的status来表明
+-- 表中的user_id是为了处理用户之间的关系而准备的，与user_group表并不冲突，也不多余
 CREATE TABLE IF NOT EXISTS USER_RELATIONAL (
   id          VARCHAR2(32) PRIMARY KEY,
   user_id     VARCHAR2(32),

@@ -1,6 +1,6 @@
 package com.honeybadger.im.fuck.user.controller;
 
-import com.honeybadger.im.fuck.user.service.GroupFriendsService;
+import com.honeybadger.im.fuck.user.service.impl.GroupFriendsServiceImpl;
 import com.honeybadger.im.fuck.user.vo.GroupFriends;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +19,7 @@ import java.util.List;
 public class GroupFriendsController {
 
     @Autowired
-    private GroupFriendsService groupFriendsService;
+    private GroupFriendsServiceImpl groupFriendsService;
 
     /**
      * 获取好友列表

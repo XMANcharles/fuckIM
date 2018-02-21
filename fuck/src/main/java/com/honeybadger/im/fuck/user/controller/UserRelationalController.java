@@ -1,13 +1,10 @@
 package com.honeybadger.im.fuck.user.controller;
 
-import com.honeybadger.im.fuck.user.service.UserRelationalService;
-import com.honeybadger.im.fuck.user.vo.GroupFriends;
+import com.honeybadger.im.fuck.user.service.impl.UserRelationalServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * 处理用户关系
@@ -19,7 +16,7 @@ import java.util.List;
 public class UserRelationalController {
 
     @Autowired
-    private UserRelationalService userRelationalService;
+    private UserRelationalServiceImpl userRelationalService;
     /**
      * 添加用户关系(即添加好友)
      * 此处须在队列中等待被添加方同意请求
