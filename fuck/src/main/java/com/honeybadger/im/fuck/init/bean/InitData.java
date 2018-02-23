@@ -11,6 +11,9 @@
 package com.honeybadger.im.fuck.init.bean;
 
 import com.honeybadger.im.fuck.user.entity.User;
+import com.honeybadger.im.fuck.user.vo.GroupFriends;
+
+import java.util.List;
 
 /**
  * 〈LayIM初始化数据结构〉
@@ -22,12 +25,18 @@ import com.honeybadger.im.fuck.user.entity.User;
 public class InitData {
 
     private final User mine;
+    private final List<GroupFriends> friend;
 
-    public InitData(User mine) {
+    public InitData(User mine,List<GroupFriends> friend) {
         this.mine = mine;
+        this.friend = friend;
     }
 
     public User getMine() {
         return mine;
+    }
+
+    public List<GroupFriends> getFriend() {
+        return friend;
     }
 }

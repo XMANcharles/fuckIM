@@ -12,7 +12,6 @@ package com.honeybadger.im.fuck.user.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.honeybadger.im.fuck.user.entity.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -55,7 +54,7 @@ public class GroupFriends implements Serializable {
                     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", insertable = false, updatable = false)
             },
             inverseJoinColumns = {@JoinColumn(name = "friend_id", referencedColumnName = "ID", insertable = false, updatable = false)})
-    private List<User> users;
+    private List<UserVO> users;
 
     public String getId() {
         return id;
@@ -81,11 +80,11 @@ public class GroupFriends implements Serializable {
         this.groupname = groupname;
     }
 
-    public List<User> getUsers() {
+    public List<UserVO> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<UserVO> users) {
         this.users = users;
     }
 

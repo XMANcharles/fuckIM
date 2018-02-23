@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "USER")
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class UserVO implements Serializable {
 
     @Id
@@ -34,9 +34,9 @@ public class UserVO implements Serializable {
 
     @Column
     private String username;
+
     /**
-     * @zcolder
-     * 提供给视图层的user对象 一个不需要密码这个属性的
+     * @zcolder 提供给视图层的user对象 一个不需要密码这个属性的
      */
     @Column
     private String password;
@@ -57,8 +57,8 @@ public class UserVO implements Serializable {
      */
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "USER_ROLE",
-            joinColumns = { @JoinColumn(name = "USER_ID", referencedColumnName = "ID") },
-            inverseJoinColumns = { @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID") })
+            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
     private List<Role> roles;
 
     public String getId() {

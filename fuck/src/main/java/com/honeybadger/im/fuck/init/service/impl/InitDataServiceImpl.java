@@ -12,10 +12,14 @@ package com.honeybadger.im.fuck.init.service.impl;
 
 import com.honeybadger.im.fuck.init.bean.InitData;
 import com.honeybadger.im.fuck.init.service.InitDataService;
+import com.honeybadger.im.fuck.user.dao.GroupFriendsRepository;
 import com.honeybadger.im.fuck.user.dao.UserRepository;
 import com.honeybadger.im.fuck.user.entity.User;
+import com.honeybadger.im.fuck.user.vo.GroupFriends;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 〈〉
@@ -30,11 +34,14 @@ public class InitDataServiceImpl implements InitDataService {
     @Autowired
     private UserRepository userRepository;
 
-    @Override
-    public InitData getInitData(String id) {
-        User me = userRepository.getOne(id);
+    @Autowired
+    private GroupFriendsRepository groupFriendsRepository;
 
-        return new InitData(me);
+    @Override
+    public InitData getInitData(String userId) {
+        User me = userRepository.getOne(userId);
+        List<GroupFriends> friends = groupFriendsRepository.findAllByUserId(userId).orElse(null);
+        return new InitData(me,friends);
     }
 
 }

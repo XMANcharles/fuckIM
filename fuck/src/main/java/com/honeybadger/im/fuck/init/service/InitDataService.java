@@ -23,9 +23,9 @@ public interface InitDataService {
 
     /**
      * 获取LayIM初始化数据
-     * @param id 用户id
+     * @param userId 用户id
      * @return 参考LayIM-InitData
      */
-    InitData getInitData(String id);
+    InitData getInitData(String userId);
 
 }
