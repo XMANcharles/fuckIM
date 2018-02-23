@@ -1,5 +1,7 @@
 package com.honeybadger.im.fuck.user.service;
 
+import org.springframework.data.jpa.repository.Query;
+
 /**
  * UserRelational接口
  * @author zcolder
@@ -22,9 +24,9 @@ public interface UserRelationalService {
      * @param userId 修改方用户Id
      * @param groupId 分组Id
      * @param friendId 被修方用户Id
-     * @param status 需要被修改的关系状态根据controller的请求来判别
+     * @param status 需要被修改的关系状态根据Controller的请求来判别
      */
-    void agreeToFriendRequest(String userId, String groupId, String friendId, String status);
+    void alterUserRelational(String userId, String groupId, String friendId, String status);
 
     /**
      * 将指定用户的指定分组好友转移向另一个分组

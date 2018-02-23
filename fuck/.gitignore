@@ -27,3 +27,6 @@ nbdist/
 .nb-gradle/
 ### zcolder ###
 MainTest.java
+
+### layui ###
+static/

@@ -54,13 +54,14 @@ public interface UserRelationalRepository extends JpaRepository<UserRelational,S
      * @param friendId 另一个用户ID(被查询方)
      * @return 用户关系
      */
-    UserRelational findByUserIdAndAndFriendId(String userId, String friendId);
+    UserRelational queryFirstByUserIdAndAndFriendId(String userId, String friendId);
 
-    /**
+    /*
      * 用户拉黑(屏蔽另一个用户)
      * 这是一个单方面操作
      * @param userId 用户ID
      * @param shieldingId 被拉黑(屏蔽)的用户ID
      */
-    void shieldingUsers(String userId, String shieldingId);
+//    @Query("UPDATE UserRelational SET status =:")
+//    void shieldingUsers(String userId, String shieldingId);
 }

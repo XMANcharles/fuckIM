@@ -3,7 +3,6 @@ package com.honeybadger.im.fuck.user.service.impl;
 import com.honeybadger.im.fuck.tool.Uuid;
 import com.honeybadger.im.fuck.user.dao.GroupFriendsRepository;
 import com.honeybadger.im.fuck.user.dao.UserRelationalRepository;
-import com.honeybadger.im.fuck.user.dao.UserVORepository;
 import com.honeybadger.im.fuck.user.service.GroupFriendService;
 import com.honeybadger.im.fuck.user.vo.GroupFriends;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +17,6 @@ import java.util.List;
  */
 @Service
 public class GroupFriendsServiceImpl implements GroupFriendService{
-
-    @Autowired
-    private UserVORepository userVORepository;
 
     @Autowired
     private GroupFriendsRepository groupFriendsRepository;

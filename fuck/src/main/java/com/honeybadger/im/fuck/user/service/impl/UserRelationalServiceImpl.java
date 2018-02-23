@@ -55,10 +55,9 @@ public class UserRelationalServiceImpl implements UserRelationalService{
         userRelationalRepository.save(respondent);
     }
 
-
     @Deprecated
     @Override
-    public void agreeToFriendRequest(String userId, String groupId, String friendId, String status){
+    public void alterUserRelational(String userId, String groupId, String friendId, String status){
         userRelationalRepository.modifyUserRelationships(userId, groupId, friendId, status);
     }
 
@@ -74,6 +73,7 @@ public class UserRelationalServiceImpl implements UserRelationalService{
         有则修改(update)用户关系
         没有就插入(insert)用户关系
          */
+
     }
 
 }
