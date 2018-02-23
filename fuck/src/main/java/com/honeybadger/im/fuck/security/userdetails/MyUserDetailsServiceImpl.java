@@ -8,10 +8,9 @@
  * <author>          <time>          <version>          <desc>
  * 作者姓名           修改时间           版本号              描述
  */
-package com.honeybadger.im.fuck.security.core.userdetails;
+package com.honeybadger.im.fuck.security.userdetails;
 
 import com.honeybadger.im.fuck.user.dao.UserVORepository;
-import com.honeybadger.im.fuck.user.entity.User;
 import com.honeybadger.im.fuck.user.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
