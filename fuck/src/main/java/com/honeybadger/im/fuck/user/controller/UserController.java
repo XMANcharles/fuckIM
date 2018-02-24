@@ -13,6 +13,7 @@ package com.honeybadger.im.fuck.user.controller;
 import com.honeybadger.im.fuck.tool.Uuid;
 import com.honeybadger.im.fuck.user.dao.UserRepository;
 import com.honeybadger.im.fuck.user.entity.User;
+import com.honeybadger.im.fuck.user.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserServiceImpl userService;
 
     /**
      * 获取User
@@ -63,12 +67,8 @@ public class UserController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public void userRegistration(@PathVariable String username,
                                  @PathVariable String password) throws Exception {
-        userRepository.findByUsername(username).orElseThrow(()->new Exception("用户已注册！"));
-        User user = new User();
-        user.setId(Uuid.getUUID());
-        user.setUsername(username);
-        //考虑是否需要将BCryptPasswordEncoder设为单例，交由Spring Bean
-        user.setPassword(new BCryptPasswordEncoder().encode(password));
+        userRepository.findFirstByUsername(username).orElseThrow(()->new Exception("用户已注册！"));
+        userService.registerUser(username,password);
     }
 
 }

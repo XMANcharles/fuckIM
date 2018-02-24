@@ -1,7 +1,5 @@
 package com.honeybadger.im.fuck.user.service;
 
-import org.springframework.data.jpa.repository.Query;
-
 /**
  * UserRelational接口
  * @author zcolder

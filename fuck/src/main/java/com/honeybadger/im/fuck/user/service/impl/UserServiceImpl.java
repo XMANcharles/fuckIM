@@ -1,7 +1,9 @@
 package com.honeybadger.im.fuck.user.service.impl;
 
 import com.honeybadger.im.fuck.tool.Uuid;
+import com.honeybadger.im.fuck.user.dao.RoleRepository;
 import com.honeybadger.im.fuck.user.dao.UserRepository;
+import com.honeybadger.im.fuck.user.entity.Role;
 import com.honeybadger.im.fuck.user.entity.User;
 import com.honeybadger.im.fuck.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,13 +42,27 @@ public class UserServiceImpl implements UserService{
     private GroupFriendsServiceImpl groupFriendsService;
 
     @Override
-    public void userRegistration(String username,String password){
-        //检查用户名合法性 暂时不写
+    public boolean registerUser(String username,String password){
+        if(username == null || "".equals(username.trim())){
+            return false;
+        }
+        if(password == null || "".equals(password.trim())){
+            return false;
+        }
+        if(username.length() > 8){
+            return false;
+        }
+        if(password.length() > 16){
+            return false;
+        }
         String userUUID = Uuid.getUUID();
         User user = new User(userUUID, username, new BCryptPasswordEncoder().encode(password), INTT_STATUS, INIT_SIGN, INIT_AVATAR);
-        userRepository.save(user);
+        user = userRepository.save(user);
         //为用户初始化两个好友分组->"我的好友"
         groupFriendsService.addGroup(userUUID,MY_GOOD_FRIEND);
+        //初始化用户权限
+        //敲你🐴🐶🐍🐮 jpa怎么插中间表数据
+        return true;
     }
 
 }
