@@ -5,7 +5,7 @@ INSERT INTO user VALUES ('0003', '耿鑫3', 1, '我要打十个！', '../images/
 INSERT INTO user VALUES ('0004', 'colder', 1, 'Fuck! World!！', '../images/forever.png','$2a$10$iPFXYw0maUa143FZlvfdLuBfGLSPtuKkVF5bU86USl4vVXL60fuuC');
 
 --ROLE
-INSERT INTO ROLE VALUES ('0001', '管理员');
+INSERT INTO ROLE VALUES ('0001', 'ADMIN');
 INSERT INTO ROLE VALUES ('0002', 'VIP');
 INSERT INTO ROLE VALUES ('0003', 'USER');
 

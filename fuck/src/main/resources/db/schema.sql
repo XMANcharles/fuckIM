@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS user (
 );
 CREATE TABLE IF NOT EXISTS role (
   id       VARCHAR2(32) PRIMARY KEY,
-  rolename VARCHAR2(32) --角色名
+  rolename VARCHAR2(10) --角色名
 );
 
 CREATE TABLE IF NOT EXISTS user_role (
