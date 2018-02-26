@@ -3,6 +3,7 @@ body{
 	padding: 0;
 	background-color: #f7fafc;
 	font: normal 100% Helvetica, Arial, sans-serif;
+	font-family: "微软雅黑";
 }
 .index-main{
 	padding: 0;
@@ -17,8 +18,7 @@ body{
 }
 .logo h1{
 	margin: 0;
-	font-size: 69px;/*<!--69px-->*/
-	font-family: "微软雅黑";
+	font-size: 69px;
 	color: #0f88eb;
 }
 .logo h2{
@@ -29,7 +29,6 @@ body{
 }
 .loginchoice{
 	margin-top: 25px;
-	font-family: "微软雅黑";
 	height: 44px;
 	text-align: center;
 	color: #9b9b9b;
@@ -67,10 +66,7 @@ body{
     outline:medium;
 }
 .user{
-	/*padding-top: 1px;*/
-	/*padding-left: 1px;*/
 	padding: 1px;
-	background-color: #ffffff;
 	border-top: 1.2px solid #e2e2e2;
 	border-left: 1.2px solid #e2e2e2;
 	border-right: 1.2px solid #e2e2e2;
@@ -78,39 +74,14 @@ body{
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
 }
-#userphone{
-	display: none;
-}
 .pass_word{
 	padding-bottom: 1px;
 	padding-left: 1px;
-	background-color: #ffffff;
 	border-right: 1.2px solid #e2e2e2;
 	border-left: 1.2px solid #e2e2e2;
 	border-bottom: 1.2px solid #e2e2e2;
 	border-bottom-left-radius: 4px;
 	border-bottom-right-radius: 4px;
-}
-.verification_code{
-	display: none;
-}
-.verification_code input{
-	width: 178px;
-}
-.verification_code button{
-	float: right;
-	background-color: #ffffff;
-    box-shadow: none;
-    border: 0;
-    border-radius: 3px;
-    line-height: 41px;
-    color: #0f88eb;
-    font-size: 14px;
-    border-left:0.5px solid #e2e2e2;
-    cursor: pointer;
-}
-#PhoneAndVerificationCode{
-	display: none;
 }
 .submit_button{
 	margin: 0 auto 18px;

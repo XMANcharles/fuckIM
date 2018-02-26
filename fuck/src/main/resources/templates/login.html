@@ -17,6 +17,9 @@
     <!--[if lt IE 9]>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script><![endif]-->
     <script type="text/javascript">
+        window.onload=function(){
+            console.log("┏━━━┛  ┃   ┃  ━┏┛  ┃  /  \n┃      ┃   ┃   ┃   ┃ /   \n┏━━━┛  ┃   ┃   ┃   ┃\\   \n┃      ┃   ┃   ┃   ┃ \\  \n┛      ━━━━┛  ━━┛  ┛  \\");
+        };
         function checkLogin() {
             $("form").submit();
         }
@@ -44,23 +47,15 @@
                 </div>
                 <div class="pass_word">
                     <input type="password" th:name="password" id="password" placeholder="PassWord"/>
-                    <div class="verification_code" id="v_code">
-                        <input type="text" name="" id="verificationCode" placeholder="verification code"/>
-                    </div>
                 </div>
             </div>
             <div class="submit_button">
                 <button type="button" class="sign_button" onclick="checkLogin()">登录</button>
             </div>
             <div class="Other_options">
+                <!-- 无效功能 -->
                 <input type="checkbox" name="remember" id="remember" value="true"/>
-                <!--
-                    作者：965747597@qq.com
-                    时间：2018-02-24
-                    描述：这个js是本地保存的而非cookie
-                -->
                 <span id="EmailAndPassword">记住账号密码<a href="email.html">忘记密码？</a></span>
-                <span id="PhoneAndVerificationCode">记住手机号<a href="phone.html">没收到短信？</a></span>
             </div>
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         </form>
