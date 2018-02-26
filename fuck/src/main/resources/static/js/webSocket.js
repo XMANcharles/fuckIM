@@ -73,7 +73,7 @@ $(function () {
         //开启连接
         var stompClient = null;
         // 开启socket连接
-        var socket = new SockJS("http://localhost/socket");
+        var socket = new SockJS("http://localhost:8080/socket");
         stompClient = Stomp.over(socket);
         stompClient.connect(headers, function (frame) {
             console.log('*****  Connected  *****');

@@ -11,12 +11,8 @@
 package com.honeybadger.im.fuck.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonSetter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -33,25 +29,28 @@ public class User implements Serializable {
 
     @Id
     private String id;
-
     @Column
     private String username;
-
     @Column
     private String password;
-
-    @Column
-    @JsonSetter
-    private Boolean status;
-
+    @Enumerated
+    private Status status;
     @Column
     private String sign;
-
     @Column
     private String avatar;
 
     public User() {
 
+    }
+
+    public User(String id, String username, String password, Status status, String sign, String avatar) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.status = status;
+        this.sign = sign;
+        this.avatar = avatar;
     }
 
     public String getId() {
@@ -78,11 +77,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Boolean isStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -102,12 +101,17 @@ public class User implements Serializable {
         this.avatar = avatar;
     }
 
-    public User(String id, String username, String password, Boolean status, String sign, String avatar) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.status = status;
-        this.sign = sign;
-        this.avatar = avatar;
+    /**
+     * 在线状态 online：在线、hide：隐身
+     */
+    public enum Status {
+        /**
+         * 在线
+         */
+        ONLINE,
+        /**
+         * 不在线-隐身
+         */
+        HIDE;
     }
 }

@@ -1,8 +1,8 @@
 --初始化脚本,第一次运行打开
 INSERT INTO user VALUES ('0001', '耿鑫1', 1, '我要打十个', 'http://tp1.sinaimg.cn/5619439268/180/40030060651/1','$2a$10$iPFXYw0maUa143FZlvfdLuBfGLSPtuKkVF5bU86USl4vVXL60fuuC');
-INSERT INTO user VALUES ('0002', '耿鑫2', 1, '我要打十个！', 'aaa.jpg','$2a$10$iPFXYw0maUa143FZlvfdLuBfGLSPtuKkVF5bU86USl4vVXL60fuuC');
-INSERT INTO user VALUES ('0003', '耿鑫3', 0, '我要打十个！', 'aaa.jpg','$2a$10$iPFXYw0maUa143FZlvfdLuBfGLSPtuKkVF5bU86USl4vVXL60fuuC');
-INSERT INTO user VALUES ('0004', 'zcodler', 1, 'Fuck! World!！', 'aaa.jpg','$2a$10$iPFXYw0maUa143FZlvfdLuBfGLSPtuKkVF5bU86USl4vVXL60fuuC');
+INSERT INTO user VALUES ('0002', '耿鑫2', 1, '我要打十个！', 'http://tp1.sinaimg.cn/5619439268/180/40030060651/1','$2a$10$iPFXYw0maUa143FZlvfdLuBfGLSPtuKkVF5bU86USl4vVXL60fuuC');
+INSERT INTO user VALUES ('0003', '耿鑫3', 0, '我要打十个！', 'http://tp1.sinaimg.cn/5619439268/180/40030060651/1','$2a$10$iPFXYw0maUa143FZlvfdLuBfGLSPtuKkVF5bU86USl4vVXL60fuuC');
+INSERT INTO user VALUES ('0004', 'zcodler', 1, 'Fuck! World!！', 'http://tp1.sinaimg.cn/5619439268/180/40030060651/1','$2a$10$iPFXYw0maUa143FZlvfdLuBfGLSPtuKkVF5bU86USl4vVXL60fuuC');
 
 --ROLE
 INSERT INTO ROLE VALUES ('0001', '管理员');

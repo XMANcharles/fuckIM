@@ -39,5 +39,5 @@ spring:
     username: sa
 
 server:
-  port: 80
+  port: 8080
 #RabbitMq

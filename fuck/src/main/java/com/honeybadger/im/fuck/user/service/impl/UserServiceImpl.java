@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService{
     /**
      * 初始化在线状态
      */
-    private final static Boolean INTT_STATUS = false;
+    private final static User.Status INIT_STATUS = User.Status.ONLINE;
     /**
      * 初始化个性签名
      */
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService{
     public void userRegistration(String username,String password){
         //检查用户名合法性 暂时不写
         String userUUID = Uuid.getUUID();
-        User user = new User(userUUID, username, new BCryptPasswordEncoder().encode(password), INTT_STATUS, INIT_SIGN, INIT_AVATAR);
+        User user = new User(userUUID, username, new BCryptPasswordEncoder().encode(password), INIT_STATUS, INIT_SIGN, INIT_AVATAR);
         userRepository.save(user);
         //为用户初始化两个好友分组->"我的好友"
         groupFriendsService.addGroup(userUUID,MY_GOOD_FRIEND);

@@ -5,41 +5,68 @@
 <head>
     <meta charset="UTF-8">
     <title>登陆</title>
-    <link rel="stylesheet" href="/layui/css/layui.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>FUCKIM</title>
+    <link rel="shortcut icon" href="@{/img/shortcut.ico}"/>
+    <link rel="stylesheet" href="@{/css/BHu.css}"/>
+    <!--
+       作者：965747597@qq.com
+       时间：2017-12-07
+       描述：防止IE9以下对viewport的不兼容
+   -->
+    <!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script><![endif]-->
+    <script type="text/javascript">
+        function checkLogin() {
+            $("form").submit();
+        }
+    </script>
 </head>
 <body>
 <div class="layui-main" layout:fragment="content">
-    <header class="layui-elip">登录</header>
-    <form class="layui-form" method="post" action="/login">
-        <div id="errorMessage" class="layui-input-inline" th:if="${param.error}">
-            <span class="card-title">Invalid user name or password</span>
+    <div class="index-main">
+        <div class="logo">
+            <h1>FUCK*IM</h1>
+            <h2>
+                <span style="font-size: 32px;">Fuck</span>
+                the world <span style="font-size: 28px;">if</span> you're rich,
+                <span style="font-size: 26px;">Otherwise</span>
+                go fuck yourself.
+            </h2>
         </div>
-        <div class="layui-input-inline">
-            <input type="text" name="username" required lay-verify="required" placeholder="用户名|邮箱|手机号"
-                   autocomplete="off" class="layui-input">
+        <div class="loginchoice">
+            <a href="">富则兼济天下，穷则独善其身</a>
         </div>
-        <div class="layui-input-inline">
-            <input type="password" name="password" required lay-verify="required" placeholder="密码" autocomplete="off"
-                   class="layui-input">
-        </div>
-        <div class="layui-input-inline login-btn">
-            <button type="submit" class="layui-btn">登录</button>
-        </div>
-        <hr/>
-        <div class="layui-input-inline">
-            <button type="button" class="layui-btn layui-btn-primary">QQ登录</button>
-        </div>
-        <div class="layui-input-inline">
-            <button type="button" class="layui-btn layui-btn-normal">微信登录</button>
-        </div>
-        <p><a href="javascript:void(0);" class="fl">立即注册</a><a href="javascript:void(0);" class="fr">忘记密码？</a></p>
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-    </form>
+        <form method="post" action="/login">
+            <div class="login_box">
+                <div class="user">
+                    <input type="text" th:name="username" id="useranme" value="" placeholder="YourName"/>
+                </div>
+                <div class="pass_word">
+                    <input type="password" th:name="password" id="password" placeholder="PassWord"/>
+                    <div class="verification_code" id="v_code">
+                        <input type="text" name="" id="verificationCode" placeholder="verification code"/>
+                    </div>
+                </div>
+            </div>
+            <div class="submit_button">
+                <button type="button" class="sign_button" onclick="checkLogin()">登录</button>
+            </div>
+            <div class="Other_options">
+                <input type="checkbox" name="remember" id="remember" value="true"/>
+                <!--
+                    作者：965747597@qq.com
+                    时间：2018-02-24
+                    描述：这个js是本地保存的而非cookie
+                -->
+                <span id="EmailAndPassword">记住账号密码<a href="email.html">忘记密码？</a></span>
+                <span id="PhoneAndVerificationCode">记住手机号<a href="phone.html">没收到短信？</a></span>
+            </div>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        </form>
+    </div>
 </div>
-<script type="text/javascript">
-    layui.use(['form'], function () {
-        var form = layui.form(), $ = layui.jquery;
-    });
-</script>
 </body>
 </html>
+
+
