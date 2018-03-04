@@ -68,4 +68,8 @@ dependencies {
 	runtime('org.springframework.boot:spring-boot-devtools')
     runtimeOnly 'org.springframework.boot:spring-boot-starter-actuator'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+	//mysql
+	compile 'mysql:mysql-connector-java:5.1.6'
+
 }

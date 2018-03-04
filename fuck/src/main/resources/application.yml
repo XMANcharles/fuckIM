@@ -25,18 +25,17 @@ spring:
     #配置更新策略-防止JPA重置表，造成数据丢失
     hibernate:
       ddl-auto: none
-#  datasource:
-#    username: sa
-#  datasource:
-#    password: sa
-#  datasource:
-#    driverClassName: org.h2.Driver
+
   datasource:
-    schema: classpath:db/schema.sql
-    data: classpath:db/data.sql
-    platform: h2
-    url: jdbc:h2:mem:fuckIM
-    username: sa
+    url: jdbc:mysql://118.89.48.231:3306/Fuckim?characterEncoding=UTF-8
+    username: root
+    password: zcolder1024
+    dbcp2:
+      driver: com.mysql.jdbc.Driver
+      max-idle: 10
+      max-wait-millis: 10000
+      min-idle: 5
+      initial-size: 5
 
 server:
   port: 80
