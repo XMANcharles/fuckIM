@@ -1,6 +1,6 @@
 package com.honeybadger.im.fuck.user.service.impl;
 
-import com.honeybadger.im.fuck.tool.Uuid;
+import com.honeybadger.im.fuck.tool.UUIDUtil;
 import com.honeybadger.im.fuck.user.dao.UserRepository;
 import com.honeybadger.im.fuck.user.entity.User;
 import com.honeybadger.im.fuck.user.service.UserService;
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public void userRegistration(String username,String password){
         //检查用户名合法性 暂时不写
-        String userUUID = Uuid.getUUID();
+        String userUUID = UUIDUtil.getUUID();
         User user = new User(userUUID, username, new BCryptPasswordEncoder().encode(password), INTT_STATUS, INIT_SIGN, INIT_AVATAR);
         userRepository.save(user);
         //为用户初始化两个好友分组->"我的好友"

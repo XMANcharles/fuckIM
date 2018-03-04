@@ -46,9 +46,6 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
         }
         //查出User
         UserVO loginUser = userVORepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("用户不存在"));
-        //对User授权
-        Set<GrantedAuthority> authorities = new HashSet<>();
-        loginUser.getRoles().forEach(t->authorities.add(new SimpleGrantedAuthority(t.getRolename())));
         //是否可用、是否过期、证书不过期为true、账户未锁定为true
         return new UserExpand(
                 username, loginUser.getPassword(),
@@ -56,7 +53,20 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
                 true,
                 true,
                 true,
-                authorities,loginUser.getId());
+                getGrantedAuthority(loginUser),loginUser.getId());
     }
+
+    /**
+     * 授权用户
+     * @param user
+     * @return
+     */
+    private Set<GrantedAuthority> getGrantedAuthority(UserVO user){
+        //对User授权
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        user.getRoles().forEach(t->authorities.add(new SimpleGrantedAuthority(t.getRolename())));
+        return authorities;
+    }
+
 
 }

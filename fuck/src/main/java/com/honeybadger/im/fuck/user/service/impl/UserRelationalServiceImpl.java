@@ -1,7 +1,7 @@
 package com.honeybadger.im.fuck.user.service.impl;
 
+import com.honeybadger.im.fuck.tool.UUIDUtil;
 import com.honeybadger.im.fuck.tool.UserRelationalStatus;
-import com.honeybadger.im.fuck.tool.Uuid;
 import com.honeybadger.im.fuck.user.dao.UserRelationalRepository;
 import com.honeybadger.im.fuck.user.service.UserRelationalService;
 import com.honeybadger.im.fuck.user.vo.UserRelational;
@@ -36,7 +36,7 @@ public class UserRelationalServiceImpl implements UserRelationalService{
     public void userRequestsToAddFriends(String userId,String groupId,String friendId){
         //为申请方添加好友关系 applicant(申请人)
         UserRelational applicant = new UserRelational(
-                Uuid.getUUID(),
+                UUIDUtil.getUUID(),
                 userId,friendId,
                 NULL_OF_STRING,groupId,
                 UserRelationalStatus.GoodFriend.getValue()
@@ -47,7 +47,7 @@ public class UserRelationalServiceImpl implements UserRelationalService{
             这是强制添加的方法，意识着各个用户没有 管理被添加的权限
         */
         UserRelational respondent = new UserRelational(
-                Uuid.getUUID(),
+                UUIDUtil.getUUID(),
                 friendId,userId,
                 NULL_OF_STRING,NULL_GROUP,
                 UserRelationalStatus.Stranger.getValue()

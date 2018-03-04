@@ -10,7 +10,7 @@
  */
 package com.honeybadger.im.fuck.user.controller;
 
-import com.honeybadger.im.fuck.tool.Uuid;
+import com.honeybadger.im.fuck.tool.UUIDUtil;
 import com.honeybadger.im.fuck.user.dao.UserRepository;
 import com.honeybadger.im.fuck.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +56,7 @@ public class UserController {
 
     /**
      * 用户注册（写一半）
-     * {@link Uuid 生成uuid的工具}
+     * {@link UUIDUtil 生成uuid的工具}
      * @param username 用户名
      * @param password 用户密码
      */
@@ -65,7 +65,7 @@ public class UserController {
                                  @PathVariable String password) throws Exception {
         userRepository.findByUsername(username).orElseThrow(()->new Exception("用户已注册！"));
         User user = new User();
-        user.setId(Uuid.getUUID());
+        user.setId(UUIDUtil.getUUID());
         user.setUsername(username);
         //考虑是否需要将BCryptPasswordEncoder设为单例，交由Spring Bean
         user.setPassword(new BCryptPasswordEncoder().encode(password));

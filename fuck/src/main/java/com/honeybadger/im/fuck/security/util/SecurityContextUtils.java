@@ -50,25 +50,21 @@ public class SecurityContextUtils {
      * @return
      */
     public static Authentication getAuthentication(HttpServletRequest request){
-        HttpSession httpSession = request.getSession(false);
-        if (httpSession!=null){
-            Object securityContext = httpSession.getAttribute(SPRING_SECURITY_CONTEXT_KEY);
-            if (securityContext instanceof SecurityContext){
-                return ((SecurityContext)securityContext).getAuthentication();
-            }
+        SecurityContext securityContext = getSecurityContext(request);
+        if(securityContext!=null){
+            return securityContext.getAuthentication();
         }
         return null;
     }
 
+    /**
+     * 获取Principal
+     * @param request
+     * @return
+     */
     public static Principal getPrincipal(HttpServletRequest request){
-        HttpSession httpSession = request.getSession(false);
-        if (httpSession!=null){
-            Object securityContext = httpSession.getAttribute(SPRING_SECURITY_CONTEXT_KEY);
-            if (securityContext instanceof SecurityContext){
-                return (Principal) ((SecurityContext)securityContext).getAuthentication().getPrincipal();
-            }
-        }
-        return null;
+        Authentication authentication = getAuthentication(request);
+        return authentication==null?null: (Principal) authentication.getPrincipal();
     }
 
 }

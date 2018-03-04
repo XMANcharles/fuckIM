@@ -1,6 +1,6 @@
 package com.honeybadger.im.fuck.user.service.impl;
 
-import com.honeybadger.im.fuck.tool.Uuid;
+import com.honeybadger.im.fuck.tool.UUIDUtil;
 import com.honeybadger.im.fuck.user.dao.GroupFriendsRepository;
 import com.honeybadger.im.fuck.user.dao.UserRelationalRepository;
 import com.honeybadger.im.fuck.user.service.GroupFriendService;
@@ -27,7 +27,7 @@ public class GroupFriendsServiceImpl implements GroupFriendService{
 
     @Override
     public void addGroup(String userId,String groupName){
-        groupFriendsRepository.save(new GroupFriends(Uuid.getUUID(),userId,groupName));
+        groupFriendsRepository.save(new GroupFriends(UUIDUtil.getUUID(),userId,groupName));
     }
 
     @Override
