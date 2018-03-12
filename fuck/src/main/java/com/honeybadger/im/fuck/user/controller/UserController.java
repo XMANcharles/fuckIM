@@ -65,10 +65,10 @@ public class UserController {
      * @param password 用户密码
      */
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public void userRegistration(@PathVariable String username,
+    public boolean userRegistration(@PathVariable String username,
                                  @PathVariable String password) throws Exception {
         userRepository.findFirstByUsername(username).orElseThrow(()->new Exception("用户已注册！"));
-        userService.registerUser(username,password);
+        return userService.registerUser(username, password);
     }
 
 }

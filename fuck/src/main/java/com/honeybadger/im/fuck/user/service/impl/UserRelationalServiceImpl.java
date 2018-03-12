@@ -55,6 +55,16 @@ public class UserRelationalServiceImpl implements UserRelationalService{
         userRelationalRepository.save(respondent);
     }
 
+    /**
+     * 删除好友
+     * @param userId   用户id
+     * @param friendId 好友id
+     */
+    @Override
+    public void deleteFriend(String userId, String friendId) {
+
+    }
+
     @Deprecated
     @Override
     public void alterUserRelational(String userId, String groupId, String friendId, String status){

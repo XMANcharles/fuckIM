@@ -18,6 +18,11 @@ import java.util.List;
 @Service
 public class GroupFriendsServiceImpl implements GroupFriendService{
 
+    /**
+     * 默认初始一个好友分组(我的好友)
+     */
+    private final static String MY_GOOD_FRIEND = "default_group";
+
     @Autowired
     private GroupFriendsRepository groupFriendsRepository;
 
@@ -32,6 +37,10 @@ public class GroupFriendsServiceImpl implements GroupFriendService{
 
     @Override
     public boolean deleteGroup(String groupId){
+        //不可删除默认分组
+        if(MY_GOOD_FRIEND.equals(groupId)){
+            return false;
+        }
         if(userRelationalRepository.findAllByGroupId(groupId).orElse(null).size()>=1){
             return false;
         }

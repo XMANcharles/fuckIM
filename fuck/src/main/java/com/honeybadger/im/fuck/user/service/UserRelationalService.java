@@ -18,6 +18,13 @@ public interface UserRelationalService {
     void userRequestsToAddFriends(String userId,String groupId,String friendId);
 
     /**
+     * 删除好友
+     * @param userId 用户id
+     * @param friendId 好友id
+     */
+    void deleteFriend(String userId, String friendId);
+
+    /**
      * 用户关系的修改
      * @param userId 修改方用户Id
      * @param groupId 分组Id

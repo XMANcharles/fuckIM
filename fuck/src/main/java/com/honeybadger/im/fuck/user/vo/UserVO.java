@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * 〈User〉
- *
+ * @implNote
  * @author Neo Geng
  * Date 2018/1/20
  * @since 1.0.0
@@ -35,9 +35,6 @@ public class UserVO implements Serializable {
     @Column
     private String username;
 
-    /**
-     * @zcolder 提供给视图层的user对象 一个不需要密码这个属性的
-     */
     @Column
     private String password;
 
