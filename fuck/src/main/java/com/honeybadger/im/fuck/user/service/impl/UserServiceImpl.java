@@ -6,7 +6,9 @@ import com.honeybadger.im.fuck.user.dao.UserRoleRepository;
 import com.honeybadger.im.fuck.user.entity.User;
 import com.honeybadger.im.fuck.user.entity.UserRole;
 import com.honeybadger.im.fuck.user.service.UserService;
+import com.sun.istack.internal.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -56,21 +58,24 @@ public class UserServiceImpl implements UserService{
     private UserRoleRepository userRoleRepository;
 
     @Override
-    public boolean registerUser(String username,String password){
+    public boolean registerUser(String username, String passwordOne, String passwordTwo){
+        if(!passwordOne.equals(passwordTwo)){
+            return false;
+        }
         if(username == null || "".equals(username.trim())){
             return false;
         }
-        if(password == null || "".equals(password.trim())){
+        if(passwordOne == null || "".equals(passwordOne.trim())){
             return false;
         }
         if(username.length() > Max_Username_length){
             return false;
         }
-        if(password.length() > Max_Password_length){
+        if(passwordOne.length() > Max_Password_length){
             return false;
         }
         String userUUID = Uuid.getUUID();
-        User user = new User(userUUID, username, new BCryptPasswordEncoder().encode(password), INIT_STATUS, INIT_SIGN, INIT_AVATAR);
+        User user = new User(userUUID, username, new BCryptPasswordEncoder().encode(passwordOne), INIT_STATUS, INIT_SIGN, INIT_AVATAR);
         userRepository.save(user);
         //为用户初始化两个好友分组->"我的好友"
         groupFriendsService.addGroup(userUUID,MY_GOOD_FRIEND);

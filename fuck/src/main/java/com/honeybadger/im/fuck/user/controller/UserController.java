@@ -62,13 +62,16 @@ public class UserController {
      * 用户注册（写一半）
      * {@link Uuid 生成uuid的工具}
      * @param username 用户名
-     * @param password 用户密码
+     * @param passwordOne 用户密码
+     * @param passwordTwo 再次确认
+     * @return {@code true}注册成功
      */
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public boolean userRegistration(@PathVariable String username,
-                                 @PathVariable String password) throws Exception {
+                                 @PathVariable String passwordOne,
+                                    @PathVariable String passwordTwo) throws Exception {
         userRepository.findFirstByUsername(username).orElseThrow(()->new Exception("用户已注册！"));
-        return userService.registerUser(username, password);
+        return userService.registerUser(username, passwordOne, passwordTwo);
     }
 
 }

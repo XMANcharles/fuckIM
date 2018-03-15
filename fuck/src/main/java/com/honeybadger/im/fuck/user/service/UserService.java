@@ -9,9 +9,10 @@ public interface UserService {
     /**
      * 用户注册
      * @param username 用户名
-     * @param password 用户密码
+     * @param passwordOne 用户密码
+     * @param passwordTwo 再次确认的密码
      * @return {@code true 注册成功}
      */
-    boolean registerUser(String username,String password);
+    boolean registerUser(String username,String passwordOne, String passwordTwo);
 
 }

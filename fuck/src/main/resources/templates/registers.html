@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Welcome join in fuck word community.</title>
+		<link rel="shortcut icon" th:href="images/B.ico" />
+		<link rel="stylesheet" th:href="css/BHu.css" />
+		<!--[if lt IE 9]>
+		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script><![endif]-->
+		<script type="text/javascript">
+            window.onload=function(){
+                console.log("┏━━━┛  ┃   ┃  ━┏┛  ┃  /  \n┃      ┃   ┃   ┃   ┃ /   \n┏━━━┛  ┃   ┃   ┃   ┃\\   \n┃      ┃   ┃   ┃   ┃ \\  \n┛      ━━━━┛  ━━┛  ┛  \\");
+            };
+		</script>
+		<style>
+			h2,h3,h4,h5,h6{
+				line-height: 2px;
+			}
+			p{
+				line-height: 0px;
+				margin: 0;
+			}
+			p:hover{
+				cursor: pointer;
+			}
+
+			/* 留言板 */
+			.message_board{
+				float: left;
+				position: relative;
+				padding: 0;
+				width: 70%;
+				height: 560px;
+				min-width: 1020px;
+			}
+			/*
+			FUCK IM logo
+			 */
+			.FUCK_IM{
+				display: inline;
+				padding: 0;
+				color: midnightblue;
+				font-size: 102px;
+				position: absolute;
+				margin: 140px 0 0 260px;
+				font-weight: 600;
+			}
+			.FUCK_IM p:hover{
+				color: #ff6060;
+			}
+			.FUCK_IM_2{
+				display: inline;
+				padding: 0;
+				color: #7740bb;
+				font-size: 90px;
+				position: absolute;
+				margin: 146px 0 0 255px;
+				letter-spacing: 10px;
+				font-weight: 600;
+			}
+			.FUCK_IM_2 p:hover{
+				color: #A5AACB;
+			}
+
+			/*
+			开发人员的样式
+			 */
+			.Developer{
+				font-size: 64px;
+				font-weight: 300;
+				color: #F00;
+				/*color: #a5aacb;*/
+				position: absolute;
+			}
+			.Developer p:hover{
+				color: #ebd2e1;
+			}
+			/*
+			围观人员的样式
+			 */
+			.Spectator{
+				font-size: 45px;
+				color: #0f88eb;
+				position: absolute;
+			}
+			.Spectator p:hover{
+				color: #0fa8ff;
+			}
+
+			/*
+			 * 格言
+			 */
+			.aphorism{
+				font-size: 24px;
+				color: #ff0000;
+				position: absolute;
+			}
+			.aphorism p:hover{
+				color: #f7fafc;
+			}
+			/*
+			注册信息栏
+			 */
+			.register{
+				float: left;
+				width: 27%;
+				text-align: center;
+			}
+			.ShiJieWuBaiQiang{
+				/*background-color: #000;*/
+				background-color: #191970;
+				width: 100%;
+				margin: 0 auto;
+				text-align: center;
+				display: block;
+				clear: both;
+			}
+		</style>
+	</head>
+	<body>
+	<div class="logo">
+		<h1>Welcome join in Fuck world.(干翻苍穹!)</h1>
+	</div>
+	<div class="message_board">
+		<ul>
+			<li><span style="color: #F00;">Developer(开发人员)</span></li>
+			<li><span style="color: #0FA8FF;">Spectator(参与人员)</span></li>
+		</ul>
+
+		<!-- FUCK*IM logo -->
+		<div class="FUCK_IM">
+			<p>FUCK*IM</p>
+		</div>
+
+		<div class="FUCK_IM_2">
+			<p>FUCK*IM</p>
+		</div>
+
+		<!-- 开发人员 -->
+		<div class="Developer" style="margin: 40px 0 0 60px;">
+			<p>Orange</p>
+		</div>
+		<div class="Developer" style="font-size: 48px; margin: 340px 0 0 260px;">
+			<p>如<span style="font-size: 64px;">风</span>如<span style="font-size: 64px;">梦</span></p>
+		</div>
+		<div class="Developer" style="font-size: 48px; margin: 0 0 0 680px;">
+			<p>心中有<span style="font-size: 90px; ">B</span>树</p>
+		</div>
+		<div class="Developer" style="font-size: 48px; margin: 400px 0 0 680px;">
+			<p><span style="font-size: 56px;">呜</span>喵王</p>
+		</div>
+
+		<!-- 名言 -->
+		<div class="aphorism" style="margin: 88px 0 0 560px;">
+			<p>物质与表象的世界.</p>
+		</div>
+		<div class="aphorism" style="margin: 233px 0 0 466px ;">
+			<p>一次编译,到处调试.</p>
+		</div>
+		<div class="aphorism" style="margin: 320px 0 0 520px;">
+			<p>最痛苦的事，不是失败，是我本可以</p>
+		</div>
+
+		<!-- 参与人员 -->
+		<div class="Spectator" style="margin: 260px 0 0 60px;">
+			<p><span style="font-size: 32px;">比猫王还菜</span>的暖<span style="font-size: 56px;">阳</span></p>
+		</div>
+		<div class="Spectator" style="margin: 190px 0 0 645px;">
+			<p>大<span style="font-size: 64px;">康</span></p>
+		</div>
+		<div class="Spectator" style="margin: 280px 0 0 780px;">
+			<p>Cooper</p>
+		</div>
+		<div class="Spectator" style="margin: 400px 0 0 400px;">
+			<p>快播</p>
+		</div>
+		<div class="Spectator" style="margin: 30px 0 0 450px;">
+			<p>Vinlic</p>
+		</div>
+
+		<!-- fuck宣言 -->
+		<div class="FUCK_IM" style="font-size: 32px; margin: 460px 0 0 100px;">
+			<p>The world if you're rich,Otherwise go fuck yourself.</p>
+		</div>
+	</div>
+	<div class="register">
+		<!--<div style="margin: 0 auto; width: 262px;border: 4px solid #000; background-color: azure; padding: 10px; border-radius: 15px;">
+            <h1>如果有来生</h1>
+            <h2>要做一颗树</h2>
+            <h3>站成永恒</h3>
+            <h4>没有悲欢的姿势</h4>
+            <h5>非常沉默，非常骄傲</h5>
+            <h6>从不寻找，从不依靠</h6>
+        </div>-->
+		<form action="" method="post">
+			<div class="login_box" style="margin-top: 250px;">
+				<div class="user">
+					<input type="text" id="useranme" value="" placeholder="YourName" />
+				</div>
+				<div class="pass_word">
+					<input type="password" id="passwordOne" placeholder="PassWord" />
+					<!-- 再次确认密码 -->
+					<input type="password" id="passwordTwo" placeholder="Reconfirm" style="border-top: 1px solid #e2e2e2;" />
+				</div>
+			</div>
+			<div class="submit_button">
+				<button type="button" class="sign_button" onclick="checkLogin()">点击加入FUCK*IM</button>
+			</div>
+		</form>
+	</div>
+	<!--
+        作者：965747597@qq.com
+        时间：2018-03-14
+        描述：不要解开下方注释
+    -->
+	<!--
+	<div class="ShiJieWuBaiQiang">
+		<font color="white" size="1" face="微软雅黑">&copy;2018 FUCK*IM · 1.0.0 · 宇宙公共网络安全备案" </font><br />
+		<font color="white" size="1" face="微软雅黑">@本页作者: 965747597@qq.com (我就是随心所欲!)</font><br />
+		<font color="red" size="1" face="微软雅黑" style="letter-spacing: 20px;">你们期待的五彩斑斓，世界五百强效果。</font><br />
+		<font color="coral" size="2" face="微软雅黑" style="letter-spacing: 20px;">你们期待的五彩斑斓，世界五百强效果。</font><br />
+		<font color="yellow"         face="微软雅黑" style="letter-spacing: 20px;">你们期待的五彩斑斓，世界五百强效果。</font><br />
+		<font color="chartreuse" size="4" face="微软雅黑" style="letter-spacing: 22px;">你们期待的五彩斑斓，世界五百强效果。</font><br />
+		<font color="aqua" size="5" face="微软雅黑" style="letter-spacing: 20px;">你们期待的五彩斑斓，世界五百强效果。</font><br />
+		<font color="blue" size="6" face="微软雅黑" style="letter-spacing: 19px;">你们期待的五彩斑斓，世界五百强效果。</font><br />
+		<font color="purple" size="7" face="微软雅黑" style="letter-spacing: 12px;">你们期待的五彩斑斓，世界五百强效果。</font>
+	</div>
+	-->
+	</body>
+</html>
+
