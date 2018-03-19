@@ -21,7 +21,7 @@
         }
 
         p {
-            line-height: 0px;
+            line-height: 0;
             margin: 0;
         }
 
@@ -52,11 +52,11 @@
             font-weight: 600;
         }
 
-        .FUCK_IM p:hover {
+        .FUCK_IM p:hover{
             color: #ff6060;
         }
 
-        .FUCK_IM_2 {
+        .FUCK_IM_2{
             display: inline;
             padding: 0;
             color: #7740bb;
@@ -67,7 +67,7 @@
             font-weight: 600;
         }
 
-        .FUCK_IM_2 p:hover {
+        .FUCK_IM_2 p:hover{
             color: #A5AACB;
         }
 
@@ -144,8 +144,10 @@
         }
     </script>
 </head>
-<div class="logo" layout:fragment="content">
-    <h1>Welcome join in Fuck world.(干翻苍穹!)</h1>
+<body layout:fragment="content">
+    <div class="logo" >
+        <h1>Welcome join in Fuck world.(干翻苍穹!)</h1>
+    </div>
     <div class="message_board">
         <ul>
             <li><span style="color: #F00;">Developer(开发人员)</span></li>
@@ -204,7 +206,7 @@
         </div>
 
         <!-- fuck宣言 -->
-        <div class="FUCK_IM" style="font-size: 18px; margin: 460px 0 0 100px;">
+        <div class="FUCK_IM" style="font-size: 32px; margin: 460px 0 0 100px;">
             <p>The world if you're rich,Otherwise go fuck yourself.</p>
         </div>
     </div>
@@ -235,24 +237,24 @@
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         </form>
     </div>
-    <!--
-        作者：965747597@qq.com
-        时间：2018-03-14
-        描述：不要解开下方注释
-    -->
-    <!--
-    <div class="ShiJieWuBaiQiang">
-        <font color="white" size="1" face="微软雅黑">&copy;2018 FUCK*IM · 1.0.0 · 宇宙公共网络安全备案" </font><br />
-        <font color="white" size="1" face="微软雅黑">@本页作者: 965747597@qq.com (我就是随心所欲!)</font><br />
-        <font color="red" size="1" face="微软雅黑" style="letter-spacing: 20px;">你们期待的五彩斑斓，世界五百强效果。</font><br />
-        <font color="coral" size="2" face="微软雅黑" style="letter-spacing: 20px;">你们期待的五彩斑斓，世界五百强效果。</font><br />
-        <font color="yellow"         face="微软雅黑" style="letter-spacing: 20px;">你们期待的五彩斑斓，世界五百强效果。</font><br />
-        <font color="chartreuse" size="4" face="微软雅黑" style="letter-spacing: 22px;">你们期待的五彩斑斓，世界五百强效果。</font><br />
-        <font color="aqua" size="5" face="微软雅黑" style="letter-spacing: 20px;">你们期待的五彩斑斓，世界五百强效果。</font><br />
-        <font color="blue" size="6" face="微软雅黑" style="letter-spacing: 19px;">你们期待的五彩斑斓，世界五百强效果。</font><br />
-        <font color="purple" size="7" face="微软雅黑" style="letter-spacing: 12px;">你们期待的五彩斑斓，世界五百强效果。</font>
-    </div>
-    -->
-</div>
-
+        <!--
+            作者：965747597@qq.com
+            时间：2018-03-14
+            描述：不要解开下方注释
+        -->
+        <!--
+        <div class="ShiJieWuBaiQiang">
+            <font color="white" size="1" face="微软雅黑">&copy;2018 FUCK*IM · 1.0.0 · 宇宙公共网络安全备案" </font><br />
+            <font color="white" size="1" face="微软雅黑">@本页作者: 965747597@qq.com (我就是随心所欲!)</font><br />
+            <font color="red" size="1" face="微软雅黑" style="letter-spacing: 20px;">你们期待的五彩斑斓，世界五百强效果。</font><br />
+            <font color="coral" size="2" face="微软雅黑" style="letter-spacing: 20px;">你们期待的五彩斑斓，世界五百强效果。</font><br />
+            <font color="yellow"         face="微软雅黑" style="letter-spacing: 20px;">你们期待的五彩斑斓，世界五百强效果。</font><br />
+            <font color="chartreuse" size="4" face="微软雅黑" style="letter-spacing: 22px;">你们期待的五彩斑斓，世界五百强效果。</font><br />
+            <font color="aqua" size="5" face="微软雅黑" style="letter-spacing: 20px;">你们期待的五彩斑斓，世界五百强效果。</font><br />
+            <font color="blue" size="6" face="微软雅黑" style="letter-spacing: 19px;">你们期待的五彩斑斓，世界五百强效果。</font><br />
+            <font color="purple" size="7" face="微软雅黑" style="letter-spacing: 12px;">你们期待的五彩斑斓，世界五百强效果。</font>
+        </div>
+        -->
+</body>
+</html>
 
