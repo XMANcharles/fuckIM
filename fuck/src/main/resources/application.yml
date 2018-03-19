@@ -2,9 +2,6 @@ spring:
   profiles:
     active: dev
 
----
-spring:
-  profiles: dev
 # 使用STOMP协议，不需要打开以下注释
   rabbitmq:
     host: 118.89.48.231
@@ -18,6 +15,11 @@ spring:
     #publisher-confirms: true
 
 # Orange_RabbitMQ-ip：192.168.75.128
+
+---
+spring:
+  profiles: dev
+
   #database-H2
   jpa:
     show-sql: true
@@ -40,4 +42,27 @@ spring:
 
 server:
   port: 8080
-#RabbitMq
+
+---
+spring:
+  profiles: master
+
+  #mysql
+  jpa:
+    show-sql: false
+    #配置更新策略-防止JPA重置表，造成数据丢失
+    hibernate:
+      ddl-auto: none
+    database: mysql
+  datasource:
+    url: jdbc:mysql://118.89.48.231:3306/Fuckim?characterEncoding=UTF-8
+    username: root
+    password: zcolder1024
+    dbcp2:
+      driver: com.mysql.jdbc.Driver
+      max-idle: 10
+      max-wait-millis: 10000
+      min-idle: 5
+      initial-size: 5
+server:
+  port: 80

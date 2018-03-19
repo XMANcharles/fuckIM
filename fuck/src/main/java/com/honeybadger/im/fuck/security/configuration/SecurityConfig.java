@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 //配置许可的URL&&除此之外全部认证
-                .mvcMatchers("/").permitAll().anyRequest().authenticated()
+                .mvcMatchers("/","/registers").permitAll().anyRequest().authenticated()
                 //启动FormLogin
                 .and().formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll()
                 //配置logout

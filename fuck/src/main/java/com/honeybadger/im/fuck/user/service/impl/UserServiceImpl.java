@@ -6,9 +6,7 @@ import com.honeybadger.im.fuck.user.dao.UserRoleRepository;
 import com.honeybadger.im.fuck.user.entity.User;
 import com.honeybadger.im.fuck.user.entity.UserRole;
 import com.honeybadger.im.fuck.user.service.UserService;
-import com.sun.istack.internal.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

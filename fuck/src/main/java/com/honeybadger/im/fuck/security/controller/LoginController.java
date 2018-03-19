@@ -10,6 +10,8 @@
  */
 package com.honeybadger.im.fuck.security.controller;
 
+import com.honeybadger.im.fuck.user.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +26,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginController {
 
+    @Autowired
+    private UserService userService;
+
     /**
      * 请求登录页面，这个View主要用来解决CSRF，传递CSRF到登录页
      * @return 逻辑视图 login
@@ -31,6 +36,24 @@ public class LoginController {
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String login(){
         return "/login";
+    }
+
+    /**
+     * 请求登录页面，这个View主要用来解决CSRF，传递CSRF到登录页
+     * @return 逻辑视图 registers
+     */
+    @RequestMapping(value = "/registers",method = RequestMethod.GET)
+    public String getRegister(){
+        return "/registers";
+    }
+
+    /**
+     * 注册
+     */
+    @RequestMapping(value = "/registers",method = RequestMethod.POST)
+    public String postRegister(String username,String passwordOne,String passwordTwo){
+        userService.registerUser(username,passwordOne,passwordOne);
+        return "redirect:/WebSocket.html";
     }
 
 }
