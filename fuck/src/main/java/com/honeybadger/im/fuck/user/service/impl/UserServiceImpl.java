@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * 用户业务逻辑层
+ * 所有固定的变量都应该被声明为private final static (凡是这样声明的变量，其作用都是'只读'所有用户共享内存中的值)
  * @author zcolder
  * @date 2018/02/01
  */
@@ -20,7 +21,7 @@ public class UserServiceImpl implements UserService{
     /**
      * 默认初始一个好友分组(我的好友)
      */
-    private final static String MY_GOOD_FRIEND = "default_group";
+    private final static String MY_GOOD_FRIEND = "我的好友";
 
     /**
      * 初始化在线状态
@@ -41,10 +42,18 @@ public class UserServiceImpl implements UserService{
      * 默认用户权限等级
      */
     private final static String DEFAULT_ROLE = "0003";
-
-    private final static int Max_Username_length = 8;
-
-    private final static int Max_Password_length = 16;
+    /**
+     * 默认的用户名非英文长度/暂时搁置，应该用正则表达式解决
+     */
+    private final static int MAX_NOENGLISH_USERNAME_LENGTH = 8;
+    /**
+     * 默认的用户名最大英文长度/暂时搁置，应该用正则表达式解决
+     */
+    private final static int MAX_ENGLISH_USERNAME_LENGTH = 20;
+    /**
+     * 最大的密码长度
+     */
+    private final static int MAX_PASSWORD_LENGTH = 20;
 
     @Autowired
     private UserRepository userRepository;
@@ -57,19 +66,24 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public boolean registerUser(String username, String passwordOne, String passwordTwo){
-        if(!passwordOne.equals(passwordTwo)){
-            return false;
-        }
+        //用户名是否为空
         if(username == null || "".equals(username.trim())){
             return false;
         }
-        if(passwordOne == null || "".equals(passwordOne.trim())){
+        //密码是否为空
+        if("".equals(passwordOne.trim())){
             return false;
         }
-        if(username.length() > Max_Username_length){
+        //密码是否相同
+        if(!passwordOne.equals(passwordTwo)){
             return false;
         }
-        if(passwordOne.length() > Max_Password_length){
+        //最大非英文名长度
+        if(username.length() > MAX_NOENGLISH_USERNAME_LENGTH){
+            return false;
+        }
+        //最大密码长度
+        if(passwordOne.length() > MAX_PASSWORD_LENGTH){
             return false;
         }
         String userUUID = Uuid.getUUID();
